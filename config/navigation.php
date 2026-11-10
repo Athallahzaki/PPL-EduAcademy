@@ -176,3 +176,4 @@ return [
 
     'help_route' => 'help',
 ];
+

@@ -25,3 +25,4 @@ $classes = $baseClasses . ' ' . ($sizes[$size] ?? $sizes['md']) . ' ' . ($varian
 <button type="{{ $type }}" {{ $attributes->merge(['class' => $classes]) }}>
     {{ $slot }}
 </button>
+

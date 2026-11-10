@@ -29,3 +29,4 @@ $classes = 'inline-flex items-center font-medium rounded-full ' . ($variants[$va
 <span {{ $attributes->merge(['class' => $classes]) }}>
     {{ $slot }}
 </span>
+

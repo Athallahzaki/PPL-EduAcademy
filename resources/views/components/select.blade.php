@@ -10,3 +10,4 @@ if ($error) {
 <select {{ $disabled ? 'disabled' : '' }} {{ $attributes->merge(['class' => $classes]) }}>
     {{ $slot }}
 </select>
+
