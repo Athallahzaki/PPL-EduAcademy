@@ -8,3 +8,4 @@ if ($error) {
 @endphp
 
 <textarea rows="{{ $rows }}" {{ $disabled ? 'disabled' : '' }} {{ $attributes->merge(['class' => $classes]) }}>{{ $slot }}</textarea>
+

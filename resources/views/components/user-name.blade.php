@@ -13,3 +13,4 @@ $isSuspended = $user ? (method_exists($user, 'isSuspended') ? $user->isSuspended
         </span>
     @endif
 </span>
+

@@ -1,58 +1,130 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# EduAcademy
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+EduAcademy is a centralized, collaborative online learning platform built with **Laravel 13**, **Blade**, **Tailwind CSS**, and **Alpine.js**.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 1. Prerequisites
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Before installing the application, verify that your machine meets all requirements:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **PHP 8.3, 8.4, or 8.5**
+  - Required PHP extensions: `mbstring`, `openssl`, `pdo_mysql`, `fileinfo`, `ctype`, `json`, `tokenizer`, `xml`, `curl`.
+  - > [!IMPORTANT]
+  - > Always verify `php -v` in your command line / terminal (e.g., PowerShell or Git Bash), not only inside your web server control panel. XAMPP's bundled CLI PHP is often older than 8.3. Use Laragon, Laravel Herd, or update your system environment PATH to point to PHP ≥ 8.3.
+- **Composer 2.x**
+- **Node.js LTS (v20+ or v22+) & npm**
+- **MySQL 8.0+ or MariaDB 10.6+**
+- **Git**
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 2. Getting Started & Installation
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Follow these steps for Laragon, Laravel Herd, or XAMPP:
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
+### Step 1: Clone the repository
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone <repository-url> eduacademy
+cd eduacademy
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### Step 2: Install PHP & Node dependencies
+```bash
+composer install
+npm install
+```
 
-## Contributing
+### Step 3: Configure Environment
+Copy `.env.example` to `.env`:
+```bash
+cp .env.example .env
+```
+Generate an application key:
+```bash
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Step 4: Database Setup
+1. Create a MySQL database named `eduacademy` with collation `utf8mb4_unicode_ci` (via phpMyAdmin, MySQL CLI, or GUI client).
+2. Configure your DB credentials in `.env`:
+   ```dotenv
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=eduacademy
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
 
-## Code of Conduct
+### Step 5: Run Migrations and Seeders
+Execute migrations and populate the initial database with administrator and local demo accounts:
+```bash
+php artisan migrate --seed
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Step 6: Create Storage Symlink
+Link the public storage directory:
+```bash
+php artisan storage:link
+```
 
-## Security Vulnerabilities
+### Step 7: Build Assets and Run the Application
+In your terminal, build assets or start the development server:
+```bash
+# Build frontend assets:
+npm run build
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# Start local server:
+php artisan serve
+```
+If using Laravel Herd or Laragon virtual hosts, navigate directly to `http://eduacademy.test`.
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 3. Seeded Demo Accounts (Local Environment)
+
+In local development (`APP_ENV=local`), all accounts are seeded with password: `password`
+
+| Role | Account / State | Email | Password |
+|------|-----------------|-------|----------|
+| **Admin** | System Administrator | `admin@eduacademy.test` | `password` |
+| **Instructor** | Active & Onboarded (with Profile & CV) | `instructor.active@eduacademy.test` | `password` |
+| **Instructor** | Pending Approval | `instructor.pending@eduacademy.test` | `password` |
+| **Instructor** | Rejected Registration | `instructor.rejected@eduacademy.test` | `password` |
+| **Student** | Active & Onboarded | `student.active@eduacademy.test` | `password` |
+| **Student** | Active & Unonboarded | `student.unonboarded@eduacademy.test` | `password` |
+| **Student** | Suspended | `student.suspended@eduacademy.test` | `password` |
+
+---
+
+## 4. Running Tests
+
+Run the full automated feature and unit test suites:
+```bash
+php artisan test
+```
+Or directly using PHPUnit:
+```bash
+php vendor/phpunit/phpunit/phpunit
+```
+
+---
+
+## 5. Git Workflow & Commit Guidelines
+
+- **Branches**:
+  - `main`: Production-ready release branch.
+  - `develop`: Integration branch.
+  - `SCRUM-XX-pbi-YY-<topic>` or `feature/pbi-XX-<topic>`: Topic branches for sprint tasks.
+- **Commit convention**:
+  - `SCRUM-11 <TYPE>: <message>` (e.g., `SCRUM-11 FEAT: Implement user and role management (PBI-07)`)
+  - Commit types: `FEAT`, `UP`, `FIX`, `REFACTOR`, `DOCS`, `TEST`, `CHORE`.
+
+---
+
+## 6. Architecture & Sprint 1 Scope
+
+- **Framework**: Laravel 13 (MVC)
+- **Frontend**: Blade Components + Tailwind CSS v4 + Alpine.js
+- **PBI-07**: User registration & authentication, single-role backed enums (`admin`, `instructor`, `student`), account lifecycle statuses (`active`, `pending`, `suspended`, `rejected`), instructor approval workflows, temporary password generation with forced change, and role-based access control middleware.

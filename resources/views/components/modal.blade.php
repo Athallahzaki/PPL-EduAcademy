@@ -89,3 +89,4 @@ $maxWidthClass = $maxWidths[$maxWidth] ?? 'sm:max-w-md';
         </div>
     </div>
 </div>
+
