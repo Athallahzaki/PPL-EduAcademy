@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin;
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -38,6 +39,7 @@ Route::middleware(['auth', 'account.active', 'password.changed', 'onboarded'])->
     // Admin Area
     Route::prefix('admin')->name('admin.')->middleware('role:admin')->group(function () {
         Route::get('/dashboard', Admin\DashboardController::class)->name('dashboard');
+        Route::resource('announcements', AnnouncementController::class)->except('show');
         Route::resource('users', Admin\UserController::class);
         Route::patch('users/{user}/status', [Admin\UserStatusController::class, 'update'])->name('users.status');
         Route::post('users/{user}/reset-password', Admin\UserPasswordResetController::class)->name('users.reset-password');
