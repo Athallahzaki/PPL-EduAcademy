@@ -1,5 +1,9 @@
 <x-layouts.app title="Student Dashboard">
     <div class="space-y-6">
+        @foreach ($announcements as $announcement)
+            <x-announcement-banner :announcement="$announcement" />
+        @endforeach
+
         <!-- Welcome Banner -->
         <div class="bg-gradient-to-r from-indigo-700 to-indigo-900 rounded-2xl p-6 sm:p-8 text-white shadow-sm">
             <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Welcome, {{ auth()->user()->name }}!</h1>
