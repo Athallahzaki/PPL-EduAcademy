@@ -2,7 +2,7 @@
 
 > **IMPORTANT NOTICE FOR DEVELOPERS / AGENTS:**  
 > Please read the integration considerations below carefully before implementing your assigned PBI.  
-> **ACTION REQUIRED:** Once you have reviewed and integrated these requirements into your PBI implementation, **DELETE THIS FILE** before committing your changes.
+> **ACTION REQUIRED:** Once you have reviewed and integrated these requirements into your PBI implementation, **REMOVE THE LIST** associated with your implementation and commit the remaining considerations, once there are no list left in this file, **DELETE THIS FILE** before committing your changes.
 
 ---
 
