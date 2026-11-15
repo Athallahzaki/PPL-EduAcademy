@@ -46,13 +46,21 @@ Route::middleware(['auth', 'account.active', 'password.changed', 'onboarded'])->
         Route::post('users/{id}/restore', [Admin\UserController::class, 'restore'])->name('users.restore');
     });
 
-    // Instructor Area
+    // Instructor Area (PBI-11)
     Route::prefix('instructor')->name('instructor.')->middleware('role:instructor')->group(function () {
         Route::get('/dashboard', Instructor\DashboardController::class)->name('dashboard');
+        Route::resource('courses', Instructor\CourseController::class);
+        Route::patch('courses/{course}/status', [Instructor\CourseStatusController::class, 'update'])->name('courses.status');
+        Route::get('courses/{course}/students', [Instructor\CourseStudentController::class, 'index'])->name('courses.students');
     });
 
-    // Student Area
+    // Student Area (PBI-11)
     Route::prefix('student')->name('student.')->middleware('role:student')->group(function () {
         Route::get('/dashboard', Student\DashboardController::class)->name('dashboard');
+        Route::get('catalog', [Student\CatalogController::class, 'index'])->name('catalog.index');
+        Route::get('catalog/{course}', [Student\CatalogController::class, 'show'])->name('catalog.show');
+        Route::post('courses/{course}/enroll', [Student\EnrollmentController::class, 'store'])->name('courses.enroll');
+        Route::get('courses', [Student\MyCourseController::class, 'index'])->name('courses.index');
+        Route::get('courses/{course}', [Student\MyCourseController::class, 'show'])->name('courses.show');
     });
 });
