@@ -34,3 +34,4 @@ class EnrollmentController extends Controller
             ->with('success', "You are now enrolled in {$course->title}.");
     }
 }
+

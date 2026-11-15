@@ -147,3 +147,4 @@ class Course extends Model
             && ! $this->instructor->trashed();
     }
 }
+

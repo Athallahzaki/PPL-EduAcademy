@@ -24,3 +24,4 @@ class EnrollmentFactory extends Factory
         ];
     }
 }
+

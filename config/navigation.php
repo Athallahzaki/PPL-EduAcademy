@@ -68,14 +68,14 @@ return [
             ],
             [
                 'label' => 'Class Catalog',
-                'route' => 'student.classes.index',
-                'active' => 'student.classes.*',
+                'route' => 'student.catalog.index',
+                'active' => 'student.catalog.*',
                 'icon' => 'book-open',
             ],
             [
                 'label' => 'My Classes',
-                'route' => 'student.my-classes.index',
-                'active' => 'student.my-classes.*',
+                'route' => 'student.courses.index',
+                'active' => 'student.courses.*',
                 'icon' => 'collection',
             ],
             [
@@ -125,8 +125,8 @@ return [
             ],
             [
                 'label' => 'My Classes',
-                'route' => 'instructor.classes.index',
-                'active' => 'instructor.classes.*',
+                'route' => 'instructor.courses.index',
+                'active' => 'instructor.courses.*',
                 'icon' => 'book-open',
             ],
             [

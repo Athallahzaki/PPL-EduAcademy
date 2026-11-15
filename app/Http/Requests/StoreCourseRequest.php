@@ -32,3 +32,4 @@ class StoreCourseRequest extends FormRequest
         ];
     }
 }
+

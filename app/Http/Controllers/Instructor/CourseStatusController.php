@@ -46,3 +46,4 @@ class CourseStatusController extends Controller
         return back()->with('success', "Class status changed to {$newStatus->label()}.");
     }
 }
+

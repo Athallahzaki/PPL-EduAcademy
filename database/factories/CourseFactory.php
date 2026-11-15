@@ -57,3 +57,4 @@ class CourseFactory extends Factory
         ]);
     }
 }
+

@@ -22,3 +22,4 @@ class Subject extends Model
         return $this->hasMany(Course::class);
     }
 }
+

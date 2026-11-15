@@ -34,3 +34,4 @@ class CourseStudentController extends Controller
         return view('instructor.courses.students', compact('course', 'students'));
     }
 }
+

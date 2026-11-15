@@ -60,3 +60,4 @@ class CatalogController extends Controller
         return view('student.catalog.show', compact('course'));
     }
 }
+

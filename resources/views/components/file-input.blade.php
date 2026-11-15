@@ -85,3 +85,4 @@
         <p class="text-xs text-red-600 mt-1">{{ $error }}</p>
     @endif
 </div>
+

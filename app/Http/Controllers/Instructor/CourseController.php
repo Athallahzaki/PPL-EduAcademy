@@ -166,3 +166,4 @@ class CourseController extends Controller
             ->with('success', 'Class deleted successfully.');
     }
 }
+

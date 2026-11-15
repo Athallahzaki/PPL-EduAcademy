@@ -22,3 +22,4 @@ $tabs = config("course_tabs.{$role}", []);
         @endforeach
     </nav>
 </div>
+

@@ -43,3 +43,4 @@ class MyCourseController extends Controller
         return view('student.courses.show', compact('course'));
     }
 }
+

@@ -96,3 +96,4 @@
         </div>
     </div>
 </x-student.course-layout>
+

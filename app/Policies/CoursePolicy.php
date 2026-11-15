@@ -121,3 +121,4 @@ class CoursePolicy
         return $user->isStudent() && $user->isEnrolledIn($course);
     }
 }
+

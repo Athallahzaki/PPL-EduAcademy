@@ -71,3 +71,4 @@
         </div>
     </div>
 </x-instructor.course-layout>
+

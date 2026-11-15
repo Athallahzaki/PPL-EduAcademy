@@ -33,3 +33,4 @@ class UpdateCourseRequest extends FormRequest
         ];
     }
 }
+

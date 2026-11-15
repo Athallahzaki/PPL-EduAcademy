@@ -39,3 +39,4 @@ $initials = strtoupper(substr($words[0], 0, 1) . (isset($words[1]) ? substr($wor
         </div>
     @endif
 </div>
+
