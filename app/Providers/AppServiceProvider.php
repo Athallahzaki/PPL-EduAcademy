@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Scholarship;
+use App\Policies\ScholarshipPolicy;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
@@ -23,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Gate::policy(Scholarship::class, ScholarshipPolicy::class);
+
         if ($this->app->isProduction()) {
             URL::forceHttps();
         }
