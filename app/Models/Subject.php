@@ -21,5 +21,10 @@ class Subject extends Model
     {
         return $this->hasMany(Course::class);
     }
+
+    public function threads(): HasMany
+    {
+        return $this->hasMany(DiscussionThread::class);
+    }
 }
 

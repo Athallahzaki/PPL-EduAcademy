@@ -40,9 +40,9 @@ return [
                 'icon' => 'calendar',
             ],
             [
-                'label' => 'Forum Moderation',
+                'label' => 'Discussion Forum',
                 'route' => 'admin.forums.index',
-                'active' => 'admin.forums.*',
+                'active' => ['admin.forums.*', 'forum.*'],
                 'icon' => 'chat-alt-2',
             ],
             [
@@ -87,7 +87,7 @@ return [
             [
                 'label' => 'Discussion Forum',
                 'route' => 'student.forums.index',
-                'active' => 'student.forums.*',
+                'active' => ['student.forums.*', 'forum.*'],
                 'icon' => 'chat-alt-2',
             ],
             [
@@ -168,7 +168,7 @@ return [
             [
                 'label' => 'Discussion Forum',
                 'route' => 'instructor.forums.index',
-                'active' => 'instructor.forums.*',
+                'active' => ['instructor.forums.*', 'forum.*'],
                 'icon' => 'chat-alt-2',
             ],
         ],

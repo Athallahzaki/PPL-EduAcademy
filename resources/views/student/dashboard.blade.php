@@ -69,5 +69,71 @@
                 </x-empty-state>
             @endif
         </div>
+
+        <!-- PBI-14: Diskusi Forum Populer (Mockup Bab 5.3 No 10) -->
+        <div class="space-y-4 pt-4 border-t border-gray-200/80">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <div>
+                    <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+                        <x-icon name="chat-alt-2" class="h-5 w-5 text-indigo-600" />
+                        <span>Diskusi Forum Komunitas</span>
+                    </h2>
+                    <p class="text-xs text-gray-500">Topik diskusi terbaru dari sesama siswa dan instruktur.</p>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <a
+                        href="{{ route('forum.threads.create') }}"
+                        class="rounded-xl border border-gray-300 bg-white px-3 py-1.5 text-xs font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
+                    >
+                        Mulai Diskusi
+                    </a>
+                    <a
+                        href="{{ route('forum.threads.index') }}"
+                        class="rounded-xl bg-indigo-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-indigo-700 transition-colors"
+                    >
+                        Buka Forum &rarr;
+                    </a>
+                </div>
+            </div>
+
+            @if ($recentThreads->isNotEmpty())
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    @foreach ($recentThreads as $thread)
+                        <div class="bg-white rounded-xl border border-gray-200/80 p-4 shadow-2xs hover:border-indigo-200 hover:shadow-xs transition-all flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between text-[11px] text-gray-500 mb-2">
+                                    <x-badge variant="indigo" size="sm">
+                                        {{ $thread->subject?->name ?? 'Umum' }}
+                                    </x-badge>
+                                    <span>{{ $thread->created_at->diffForHumans() }}</span>
+                                </div>
+                                <h4 class="font-bold text-sm text-gray-900 hover:text-indigo-600 line-clamp-2">
+                                    <a href="{{ route('forum.threads.show', $thread) }}">
+                                        {{ $thread->title }}
+                                    </a>
+                                </h4>
+                                <p class="text-xs text-gray-500 line-clamp-2 mt-1">
+                                    {{ Str::limit(strip_tags($thread->content), 100) }}
+                                </p>
+                            </div>
+
+                            <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-[11px] text-gray-500">
+                                <span class="font-medium text-gray-700 truncate max-w-[140px]">
+                                    {{ $thread->user?->name }}
+                                </span>
+                                <a href="{{ route('forum.threads.show', $thread) }}" class="font-semibold text-indigo-600 hover:text-indigo-800 transition-colors">
+                                    Baca &rarr;
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <div class="rounded-xl border border-dashed border-gray-200 bg-white p-6 text-center text-xs text-gray-500">
+                    Belum ada topik diskusi terbaru. Mulai diskusi pertama sekarang!
+                </div>
+            @endif
+        </div>
     </div>
 </x-layouts.app>
