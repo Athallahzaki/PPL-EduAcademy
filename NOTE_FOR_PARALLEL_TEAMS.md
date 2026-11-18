@@ -6,15 +6,6 @@
 
 ---
 
-## 1. Notice for PBI-14: Discussion Forum (Sprint 2)
-- **Shared `subjects` Table**:
-  - The `subjects` table has already been established by PBI-11 with columns: `id`, `name` (string 80), `slug` (string 80), and timestamps.
-  - `SubjectSeeder` is executed automatically in all environments (populating: `Programming`, `Design`, `Mathematics`, `Science`, `Languages`, `Business`, `Other`).
-  - **Requirement**: Use `subject_id` as a foreign key constrained to the `subjects` table in your forum migrations/models instead of using a free-text category column.
-  - Subject model: `App\Models\Subject`.
-
----
-
 ## 2. Notice for Sprint 3 Teams (PBI-12 Materials, PBI-13 Assignments, PBI-05 Live Sessions, PBI-06 Quizzes, PBI-09 Reviews)
 - **Class Hub Architecture (`config/course_tabs.php`)**:
   - The Course Hub operates on a config-driven tab layout. In `config/course_tabs.php`, reserved routes for your features are already predefined:

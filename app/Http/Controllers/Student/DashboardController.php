@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\Announcement;
+use App\Models\DiscussionThread;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -30,6 +31,13 @@ class DashboardController extends Controller
             ->take(3)
             ->get();
 
-        return view('student.dashboard', compact('announcements', 'recentCourses'));
+        // PBI-14: Forum Diskusi Terbaru
+        $recentThreads = DiscussionThread::query()
+            ->with(['user', 'subject'])
+            ->latest('created_at')
+            ->take(3)
+            ->get();
+
+        return view('student.dashboard', compact('announcements', 'recentCourses', 'recentThreads'));
     }
 }

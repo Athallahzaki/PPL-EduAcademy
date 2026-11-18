@@ -95,6 +95,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Discussion threads started by this user.
+     */
+    public function threads(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(DiscussionThread::class);
+    }
+
+    /**
      * Determine if the student is enrolled in a given course.
      */
     public function isEnrolledIn(Course|int $course): bool
