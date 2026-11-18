@@ -15,13 +15,20 @@
                     Manage Accounts & Roles
                 </a>
                 <a
-                    href="{{ route('admin.users.create') }}"
+                    href="{{ route('admin.scholarships.index') }}"
+                    class="inline-flex items-center gap-2 rounded-xl bg-white/10 hover:bg-white/20 px-4 py-2.5 text-sm font-semibold text-white border border-white/20 transition-colors"
+                >
+                    <x-icon name="academic-cap" class="h-4 w-4 text-white" />
+                    Info Beasiswa ({{ $publishedScholarships }})
+                </a>
+                <a
+                    href="{{ route('admin.scholarships.create') }}"
                     class="inline-flex items-center gap-2 rounded-xl bg-indigo-600/80 hover:bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white border border-indigo-400/40 transition-colors"
                 >
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
-                    New User Account
+                    Publikasikan Beasiswa
                 </a>
             </div>
         </div>
@@ -117,14 +124,29 @@
 
             <x-card>
                 <x-slot:header>
-                    <h3 class="text-sm font-semibold text-gray-900">Upcoming Features (Sprint 2 - 4)</h3>
+                    <h3 class="text-sm font-semibold text-gray-900">Sprint Features Progress</h3>
                 </x-slot:header>
-                <div class="space-y-2 text-xs text-gray-500">
-                    <p>• <strong>PBI-01:</strong> Class Catalog & Course Enrolment</p>
-                    <p>• <strong>PBI-02:</strong> Module Content & Chapter Video Player</p>
-                    <p>• <strong>PBI-03:</strong> Assignment Submissions & Grading</p>
-                    <p>• <strong>PBI-05:</strong> Scholarships Announcement & Verification</p>
-                    <p>• <strong>PBI-08:</strong> Live Interactive Sessions & Discussions</p>
+                <div class="space-y-2 text-xs text-gray-600">
+                    <div class="flex items-center justify-between py-1 border-b border-gray-100">
+                        <span><strong>PBI-01:</strong> CRUD Listing Info Beasiswa</span>
+                        <x-badge variant="active">Operational</x-badge>
+                    </div>
+                    <div class="flex items-center justify-between py-1 border-b border-gray-100">
+                        <span><strong>PBI-07:</strong> User & Role Management</span>
+                        <x-badge variant="active">Operational</x-badge>
+                    </div>
+                    <div class="flex items-center justify-between py-1 border-b border-gray-100">
+                        <span><strong>PBI-08:</strong> System Announcements</span>
+                        <x-badge variant="active">Operational</x-badge>
+                    </div>
+                    <div class="flex items-center justify-between py-1 border-b border-gray-100">
+                        <span><strong>PBI-11:</strong> Master Classes / Courses</span>
+                        <x-badge variant="active">Operational</x-badge>
+                    </div>
+                    <div class="flex items-center justify-between py-1">
+                        <span><strong>PBI-02:</strong> Pendaftaran & Seleksi Beasiswa</span>
+                        <x-badge variant="pending">Sprint 3</x-badge>
+                    </div>
                 </div>
             </x-card>
         </div>

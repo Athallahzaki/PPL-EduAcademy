@@ -40,6 +40,8 @@ Route::middleware(['auth', 'account.active', 'password.changed', 'onboarded'])->
     Route::prefix('admin')->name('admin.')->middleware('role:admin')->group(function () {
         Route::get('/dashboard', Admin\DashboardController::class)->name('dashboard');
         Route::resource('announcements', AnnouncementController::class)->except('show');
+        Route::resource('scholarships', Admin\ScholarshipController::class);
+        Route::post('scholarships/{id}/restore', [Admin\ScholarshipController::class, 'restore'])->name('scholarships.restore');
         Route::resource('users', Admin\UserController::class);
         Route::patch('users/{user}/status', [Admin\UserStatusController::class, 'update'])->name('users.status');
         Route::post('users/{user}/reset-password', Admin\UserPasswordResetController::class)->name('users.reset-password');
