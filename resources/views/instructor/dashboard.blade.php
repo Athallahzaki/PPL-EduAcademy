@@ -23,6 +23,12 @@
                     Create Class
                 </a>
                 <a
+                    href="{{ route('instructor.profile.show') }}"
+                    class="inline-flex items-center gap-2 rounded-xl bg-white/10 hover:bg-white/20 px-4 py-2.5 text-sm font-semibold text-white border border-indigo-300/40 transition-colors"
+                >
+                    My Profile
+                </a>
+                <a
                     href="{{ route('instructor.courses.index') }}"
                     class="inline-flex items-center gap-2 rounded-xl bg-indigo-600/80 hover:bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white border border-indigo-400/40 transition-colors"
                 >

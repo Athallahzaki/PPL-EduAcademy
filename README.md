@@ -142,7 +142,9 @@ php vendor/phpunit/phpunit/phpunit
 - **Frontend**: Blade Components + Tailwind CSS v4 + Alpine.js
 - **PBI-07**: User registration & authentication, single-role backed enums (`admin`, `instructor`, `student`), account lifecycle statuses (`active`, `pending`, `suspended`, `rejected`), instructor approval workflows, temporary password generation with forced change, and role-based access control middleware.
 
-### Sprint 2: PBI-11 Master Classes / Courses
+### Sprint 2: PBI-01, PBI-04, PBI-08, PBI-11, PBI-14
+
+#### PBI-11 Master Classes / Courses
 
 - **Instructors** create, edit, publish, archive and delete their own classes (title, description, subject, level, optional banner). Status flow: `draft → published → archived`, with `published → draft` only when no students are enrolled. Classes with enrolled students cannot be deleted (archive instead); deletion is a soft delete.
 - **Students** browse a catalog of published classes (search, subject and level filters), open a class and enroll with one click (free, no un-enroll), then find it under **My Classes**.
@@ -150,4 +152,16 @@ php vendor/phpunit/phpunit/phpunit
 - **Authorization**: `CoursePolicy` (`manage` for instructors, `browse`/`enroll`/`access` for students). Other instructors' classes return 403; hidden classes return 404.
 - **Class hub**: tabs are config-driven (`config/course_tabs.php`) and appear automatically once the named route exists. Wrap hub pages in `<x-instructor.course-layout>` / `<x-student.course-layout>`. Reserved routes for Sprint 3 (modules, assignments, sessions, quizzes, reviews) are listed in that file.
 - **Shared `subjects` table** (seeded, no admin CRUD) is also meant for the discussion forum (PBI-14, use `subject_id`).
-- New tables: `subjects`, `courses`, `enrollments`. Full details: `docs/EduAcademy_Sprint2_PBI-11_Spec.md`.
+- New tables: `subjects`, `courses`, `enrollments`. The detailed PBI-11 spec lives in the git-ignored `docs/` folder and is not part of this repository.
+
+#### PBI-01 Scholarship Listing (Admin)
+- Admins create, edit and delete scholarship listings (title, description, requirements, quota, start date, deadline). Status flow: `draft`, `published`, `closed`. Deletion is a soft delete and listings can be restored. Authorization is handled by `ScholarshipPolicy`; only admins reach `/admin/scholarships`.
+
+#### PBI-04 Instructor Profile & Specialization
+- Instructors view and edit their profile at `/instructor/profile` (bio, expertise, optional portfolio URL, PDF CV up to 2 MB). The CV is stored on the private `local` disk under `instructor-cvs` and is downloaded through `/instructor/profile/cv`; replacing a CV deletes the previous file. The profile is created at onboarding (PBI-07) and edited here afterwards.
+
+#### PBI-08 System Announcements
+- Admins create, edit and delete announcements (title, content, optional image, active flag, publish date). Active announcements show as a banner on the student and instructor dashboards.
+
+#### PBI-14 Discussion Threads
+- Students, instructors and admins browse threads at `/forum/threads` (filter by subject). Users create, edit and delete their own threads; admins can also edit and delete any thread. Categories use the shared `subjects` table through `subject_id`. Replies (PBI-15) and reporting/moderation (PBI-16) arrive in later sprints.

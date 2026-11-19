@@ -14,12 +14,14 @@ class ProfileController extends Controller
     public function show(Request $request): View
     {
         $profile = $request->user()->instructorProfile;
+
         return view('instructor.profile.show', compact('profile'));
     }
 
     public function edit(Request $request): View
     {
         $profile = $request->user()->instructorProfile;
+
         return view('instructor.profile.edit', compact('profile'));
     }
 
@@ -63,6 +65,6 @@ class ProfileController extends Controller
             404
         );
 
-        return Storage::disk('local')->download($profile->cv_path, 'CV-' . str($request->user()->name)->slug() . '.pdf');
+        return Storage::disk('local')->download($profile->cv_path, 'CV-'.str($request->user()->name)->slug().'.pdf');
     }
 }

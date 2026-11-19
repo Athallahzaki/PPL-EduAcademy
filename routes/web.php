@@ -53,6 +53,10 @@ Route::middleware(['auth', 'account.active', 'password.changed', 'onboarded'])->
     // Instructor Area (PBI-11)
     Route::prefix('instructor')->name('instructor.')->middleware('role:instructor')->group(function () {
         Route::get('/dashboard', Instructor\DashboardController::class)->name('dashboard');
+        Route::get('/profile', [Instructor\ProfileController::class, 'show'])->name('profile.show');
+        Route::get('/profile/edit', [Instructor\ProfileController::class, 'edit'])->name('profile.edit');
+        Route::put('/profile', [Instructor\ProfileController::class, 'update'])->name('profile.update');
+        Route::get('/profile/cv', [Instructor\ProfileController::class, 'downloadCv'])->name('profile.cv');
         Route::resource('courses', Instructor\CourseController::class);
         Route::patch('courses/{course}/status', [Instructor\CourseStatusController::class, 'update'])->name('courses.status');
         Route::get('courses/{course}/students', [Instructor\CourseStudentController::class, 'index'])->name('courses.students');

@@ -32,7 +32,7 @@
         </div>
 
         <!-- Metric Stat Cards -->
-        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-5">
             <!-- Total Users -->
             <div class="bg-white rounded-xl border border-gray-200/80 p-5 shadow-sm">
                 <div class="flex items-center justify-between">
@@ -92,6 +92,18 @@
                 <p class="mt-3 text-3xl font-bold tracking-tight text-gray-900">{{ $activeInstructors }}</p>
                 <div class="mt-2 text-xs text-gray-500">Teaching faculty members</div>
             </div>
+
+            <!-- Published Classes -->
+            <div class="bg-white rounded-xl border border-gray-200/80 p-5 shadow-sm">
+                <div class="flex items-center justify-between">
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Active Classes</p>
+                    <span class="rounded-lg bg-violet-50 p-2 text-violet-600">
+                        <x-icon name="collection" class="h-5 w-5" />
+                    </span>
+                </div>
+                <p class="mt-3 text-3xl font-bold tracking-tight text-gray-900">{{ $publishedCourses }}</p>
+                <div class="mt-2 text-xs text-gray-500">Published classes in the catalog</div>
+            </div>
         </div>
 
         <!-- Overview Content Cards -->
@@ -127,6 +139,10 @@
                 <div class="space-y-2 text-xs text-gray-600">
                     <div class="flex items-center justify-between py-1 border-b border-gray-100">
                         <span><strong>PBI-01:</strong> CRUD Listing Info Beasiswa</span>
+                        <x-badge variant="active">Operational</x-badge>
+                    </div>
+                    <div class="flex items-center justify-between py-1 border-b border-gray-100">
+                        <span><strong>PBI-04:</strong> Instructor Profile & Specialization</span>
                         <x-badge variant="active">Operational</x-badge>
                     </div>
                     <div class="flex items-center justify-between py-1 border-b border-gray-100">
