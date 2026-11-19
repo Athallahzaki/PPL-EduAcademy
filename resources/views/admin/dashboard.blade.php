@@ -22,13 +22,11 @@
                     Info Beasiswa ({{ $publishedScholarships }})
                 </a>
                 <a
-                    href="{{ route('admin.scholarships.create') }}"
-                    class="inline-flex items-center gap-2 rounded-xl bg-indigo-600/80 hover:bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white border border-indigo-400/40 transition-colors"
+                    href="{{ route('forum.threads.index') }}"
+                    class="inline-flex items-center gap-2 rounded-xl bg-white/10 hover:bg-white/20 px-4 py-2.5 text-sm font-semibold text-white border border-white/20 transition-colors"
                 >
-                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                    </svg>
-                    Publikasikan Beasiswa
+                    <x-icon name="chat-alt-2" class="h-4 w-4 text-white" />
+                    Forum Komunitas
                 </a>
             </div>
         </div>
@@ -142,6 +140,18 @@
                     <div class="flex items-center justify-between py-1 border-b border-gray-100">
                         <span><strong>PBI-11:</strong> Master Classes / Courses</span>
                         <x-badge variant="active">Operational</x-badge>
+                    </div>
+                    <div class="flex items-center justify-between py-1 border-b border-gray-100">
+                        <span><strong>PBI-14:</strong> Thread / Topik Diskusi</span>
+                        <x-badge variant="active">Operational</x-badge>
+                    </div>
+                    <div class="flex items-center justify-between py-1 border-b border-gray-100">
+                        <span><strong>PBI-15:</strong> Komentar & Balasan Berjenjang</span>
+                        <x-badge variant="pending">Sprint 3</x-badge>
+                    </div>
+                    <div class="flex items-center justify-between py-1 border-b border-gray-100">
+                        <span><strong>PBI-16:</strong> Moderasi & Laporan Forum</span>
+                        <x-badge variant="pending">Sprint 4</x-badge>
                     </div>
                     <div class="flex items-center justify-between py-1">
                         <span><strong>PBI-02:</strong> Pendaftaran & Seleksi Beasiswa</span>

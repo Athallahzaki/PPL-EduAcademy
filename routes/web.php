@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\OnboardingController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Forum;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Instructor;
 use App\Http\Controllers\Student;
@@ -46,6 +47,7 @@ Route::middleware(['auth', 'account.active', 'password.changed', 'onboarded'])->
         Route::patch('users/{user}/status', [Admin\UserStatusController::class, 'update'])->name('users.status');
         Route::post('users/{user}/reset-password', Admin\UserPasswordResetController::class)->name('users.reset-password');
         Route::post('users/{id}/restore', [Admin\UserController::class, 'restore'])->name('users.restore');
+        Route::get('forums', [Forum\ThreadController::class, 'index'])->name('forums.index');
     });
 
     // Instructor Area (PBI-11)
@@ -54,6 +56,7 @@ Route::middleware(['auth', 'account.active', 'password.changed', 'onboarded'])->
         Route::resource('courses', Instructor\CourseController::class);
         Route::patch('courses/{course}/status', [Instructor\CourseStatusController::class, 'update'])->name('courses.status');
         Route::get('courses/{course}/students', [Instructor\CourseStudentController::class, 'index'])->name('courses.students');
+        Route::get('forums', [Forum\ThreadController::class, 'index'])->name('forums.index');
     });
 
     // Student Area (PBI-11)
@@ -64,5 +67,11 @@ Route::middleware(['auth', 'account.active', 'password.changed', 'onboarded'])->
         Route::post('courses/{course}/enroll', [Student\EnrollmentController::class, 'store'])->name('courses.enroll');
         Route::get('courses', [Student\MyCourseController::class, 'index'])->name('courses.index');
         Route::get('courses/{course}', [Student\MyCourseController::class, 'show'])->name('courses.show');
+        Route::get('forums', [Forum\ThreadController::class, 'index'])->name('forums.index');
+    });
+
+    // Forum Community Area (PBI-14: Thread/Topik Diskusi)
+    Route::prefix('forum')->name('forum.')->group(function () {
+        Route::resource('threads', Forum\ThreadController::class);
     });
 });
