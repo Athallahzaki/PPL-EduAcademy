@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Enums\AccountStatus;
+use App\Enums\CourseStatus;
 use App\Enums\Role;
 use App\Enums\ScholarshipStatus;
 use App\Http\Controllers\Controller;
+use App\Models\Course;
 use App\Models\Scholarship;
 use App\Models\User;
 use Illuminate\View\View;
@@ -27,6 +29,7 @@ class DashboardController extends Controller
         $activeInstructors = User::where('role', Role::Instructor->value)
             ->where('status', AccountStatus::Active->value)
             ->count();
+        $publishedCourses = Course::where('status', CourseStatus::Published->value)->count();
         $totalScholarships = Scholarship::count();
         $publishedScholarships = Scholarship::where('status', ScholarshipStatus::Published->value)->count();
 
@@ -35,9 +38,9 @@ class DashboardController extends Controller
             'pendingInstructors',
             'activeStudents',
             'activeInstructors',
+            'publishedCourses',
             'totalScholarships',
             'publishedScholarships'
         ));
     }
 }
-
