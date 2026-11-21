@@ -106,7 +106,7 @@
 
             <!-- Right: Enrollment CTA Card -->
             <div class="space-y-6">
-                <x-card class="sticky top-6">
+                <x-card class="sticky top-24">
                     <x-slot:header>
                         <h3 class="text-base font-bold text-gray-900">Class Enrolment</h3>
                     </x-slot:header>

@@ -45,7 +45,7 @@ if ($user?->name) {
         <!-- Sidebar -->
         <aside
             :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'"
-            class="fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-200/80 flex flex-col transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 shrink-0"
+            class="fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-200/80 flex flex-col transition-transform duration-300 ease-in-out lg:sticky lg:top-0 lg:bottom-auto lg:h-screen lg:self-start lg:translate-x-0 shrink-0"
         >
             <!-- Logo Header -->
             <div class="h-16 flex items-center justify-between px-6 border-b border-gray-100">
@@ -121,7 +121,7 @@ if ($user?->name) {
         <!-- Main Content Area -->
         <div class="flex-1 flex flex-col min-w-0">
             <!-- Topbar -->
-            <header class="h-16 bg-white border-b border-gray-200/80 px-4 sm:px-6 lg:px-8 flex items-center justify-between shrink-0">
+            <header class="sticky top-0 z-30 h-16 bg-white border-b border-gray-200/80 px-4 sm:px-6 lg:px-8 flex items-center justify-between shrink-0">
                 <div class="flex items-center gap-3">
                     <button
                         type="button"
