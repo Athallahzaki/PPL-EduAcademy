@@ -91,7 +91,7 @@ class ThreadController extends Controller
 
         return redirect()
             ->route('forum.threads.show', $thread)
-            ->with('status', 'Topik diskusi berhasil dipublikasikan.');
+            ->with('status', 'Discussion topic published successfully.');
     }
 
     /**
@@ -133,7 +133,7 @@ class ThreadController extends Controller
 
         return redirect()
             ->route('forum.threads.show', $thread)
-            ->with('status', 'Topik diskusi berhasil diperbarui.');
+            ->with('status', 'Discussion topic updated successfully.');
     }
 
     /**
@@ -147,6 +147,6 @@ class ThreadController extends Controller
 
         return redirect()
             ->route('forum.threads.index')
-            ->with('status', 'Topik diskusi berhasil dihapus.');
+            ->with('status', 'Discussion topic deleted successfully.');
     }
 }

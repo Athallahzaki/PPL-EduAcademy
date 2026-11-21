@@ -31,7 +31,7 @@ class ThreadManagementTest extends TestCase
         $response = $this->actingAs($student)->get(route('forum.threads.index'));
 
         $response->assertOk();
-        $response->assertSee('Forum Diskusi Komunitas');
+        $response->assertSee('Community Discussion Forum');
         $response->assertSee('Belajar Algoritma Pemrograman');
         $response->assertSee('Programming');
     }

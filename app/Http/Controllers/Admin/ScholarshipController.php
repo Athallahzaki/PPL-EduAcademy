@@ -75,7 +75,7 @@ class ScholarshipController extends Controller
         ]);
 
         return redirect()->route('admin.scholarships.show', $scholarship)
-            ->with('success', 'Info beasiswa berhasil dipublikasikan.');
+            ->with('success', 'Scholarship published successfully.');
     }
 
     /**
@@ -110,7 +110,7 @@ class ScholarshipController extends Controller
         $scholarship->update($request->validated());
 
         return redirect()->route('admin.scholarships.show', $scholarship)
-            ->with('success', 'Info beasiswa berhasil diperbarui.');
+            ->with('success', 'Scholarship updated successfully.');
     }
 
     /**
@@ -123,7 +123,7 @@ class ScholarshipController extends Controller
         $scholarship->delete();
 
         return redirect()->route('admin.scholarships.index')
-            ->with('success', 'Info beasiswa berhasil dihapus.');
+            ->with('success', 'Scholarship deleted successfully.');
     }
 
     /**
@@ -138,6 +138,6 @@ class ScholarshipController extends Controller
         $scholarship->restore();
 
         return redirect()->route('admin.scholarships.index')
-            ->with('success', 'Info beasiswa berhasil dipulihkan.');
+            ->with('success', 'Scholarship restored successfully.');
     }
 }

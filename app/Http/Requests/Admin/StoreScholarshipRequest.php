@@ -42,13 +42,13 @@ class StoreScholarshipRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'title' => 'judul beasiswa',
-            'description' => 'deskripsi beasiswa',
-            'requirements' => 'persyaratan beasiswa',
-            'quota' => 'kuota beasiswa',
-            'start_date' => 'tanggal mulai pendaftaran',
-            'deadline' => 'tenggat waktu pendaftaran',
-            'status' => 'status publikasi',
+            'title' => 'scholarship title',
+            'description' => 'scholarship description',
+            'requirements' => 'scholarship requirements',
+            'quota' => 'scholarship quota',
+            'start_date' => 'registration start date',
+            'deadline' => 'registration deadline',
+            'status' => 'publication status',
         ];
     }
 }

@@ -19,14 +19,14 @@
                     class="inline-flex items-center gap-2 rounded-xl bg-white/10 hover:bg-white/20 px-4 py-2.5 text-sm font-semibold text-white border border-white/20 transition-colors"
                 >
                     <x-icon name="academic-cap" class="h-4 w-4 text-white" />
-                    Info Beasiswa ({{ $publishedScholarships }})
+                    Scholarship Info ({{ $publishedScholarships }})
                 </a>
                 <a
                     href="{{ route('forum.threads.index') }}"
                     class="inline-flex items-center gap-2 rounded-xl bg-white/10 hover:bg-white/20 px-4 py-2.5 text-sm font-semibold text-white border border-white/20 transition-colors"
                 >
                     <x-icon name="chat-alt-2" class="h-4 w-4 text-white" />
-                    Forum Komunitas
+                    Community Forum
                 </a>
             </div>
         </div>
@@ -138,7 +138,7 @@
                 </x-slot:header>
                 <div class="space-y-2 text-xs text-gray-600">
                     <div class="flex items-center justify-between py-1 border-b border-gray-100">
-                        <span><strong>PBI-01:</strong> CRUD Listing Info Beasiswa</span>
+                        <span><strong>PBI-01:</strong> Scholarship Info Listing</span>
                         <x-badge variant="active">Operational</x-badge>
                     </div>
                     <div class="flex items-center justify-between py-1 border-b border-gray-100">
@@ -158,19 +158,19 @@
                         <x-badge variant="active">Operational</x-badge>
                     </div>
                     <div class="flex items-center justify-between py-1 border-b border-gray-100">
-                        <span><strong>PBI-14:</strong> Thread / Topik Diskusi</span>
+                        <span><strong>PBI-14:</strong> Discussion Threads</span>
                         <x-badge variant="active">Operational</x-badge>
                     </div>
                     <div class="flex items-center justify-between py-1 border-b border-gray-100">
-                        <span><strong>PBI-15:</strong> Komentar & Balasan Berjenjang</span>
+                        <span><strong>PBI-15:</strong> Threaded Comments & Replies</span>
                         <x-badge variant="pending">Sprint 3</x-badge>
                     </div>
                     <div class="flex items-center justify-between py-1 border-b border-gray-100">
-                        <span><strong>PBI-16:</strong> Moderasi & Laporan Forum</span>
+                        <span><strong>PBI-16:</strong> Forum Moderation & Reports</span>
                         <x-badge variant="pending">Sprint 4</x-badge>
                     </div>
                     <div class="flex items-center justify-between py-1">
-                        <span><strong>PBI-02:</strong> Pendaftaran & Seleksi Beasiswa</span>
+                        <span><strong>PBI-02:</strong> Scholarship Registration & Selection</span>
                         <x-badge variant="pending">Sprint 3</x-badge>
                     </div>
                 </div>
