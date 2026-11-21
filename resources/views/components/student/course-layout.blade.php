@@ -25,9 +25,7 @@
                             <x-badge variant="amber">Archived</x-badge>
                         @endif
 
-                        <span class="inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-700 ring-1 ring-inset ring-emerald-600/20">
-                            Enrolled
-                        </span>
+                        <x-badge variant="success">Enrolled</x-badge>
                     </div>
 
                     <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-gray-900 truncate">

@@ -12,8 +12,8 @@ enum ScholarshipStatus: string
     {
         return match ($this) {
             self::Draft => 'Draft',
-            self::Published => 'Dipublikasikan',
-            self::Closed => 'Ditutup',
+            self::Published => 'Published',
+            self::Closed => 'Closed',
         };
     }
 

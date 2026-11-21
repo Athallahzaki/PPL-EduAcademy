@@ -3,15 +3,12 @@
         <!-- Header -->
         <x-page-header title="My Classes" description="View and continue learning from all the courses you have enrolled in.">
             <x-slot:actions>
-                <a
-                    href="{{ route('student.catalog.index') }}"
-                    class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 transition-colors"
-                >
-                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                    </svg>
-                    Browse Catalog
-                </a>
+                <x-button :href="route('student.catalog.index')" size="md">
+<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+</svg>
+Browse Catalog
+</x-button>
             </x-slot:actions>
         </x-page-header>
 
@@ -36,12 +33,9 @@
                 description="Explore our wide variety of courses in the class catalog and start your learning journey today!"
                 icon="academic-cap"
             >
-                <a
-                    href="{{ route('student.catalog.index') }}"
-                    class="rounded-lg bg-indigo-600 px-4 py-2 text-xs font-semibold text-white hover:bg-indigo-700 transition-colors"
-                >
-                    Explore Class Catalog
-                </a>
+                <x-button :href="route('student.catalog.index')" size="sm">
+Explore Class Catalog
+</x-button>
             </x-empty-state>
         @endif
     </div>

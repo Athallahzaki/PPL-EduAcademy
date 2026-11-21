@@ -1,18 +1,18 @@
-<x-layouts.app title="Edit Topik Diskusi">
+<x-layouts.app title="Edit Topic">
     <div class="max-w-4xl mx-auto space-y-6">
         <!-- Breadcrumb -->
         <nav class="flex items-center text-xs text-gray-500 gap-2">
-            <a href="{{ route('forum.threads.index') }}" class="hover:text-indigo-600 transition-colors">Forum Diskusi</a>
+            <a href="{{ route('forum.threads.index') }}" class="hover:text-indigo-600 transition-colors">Discussion Forum</a>
             <span>&rsaquo;</span>
             <a href="{{ route('forum.threads.show', $thread) }}" class="hover:text-indigo-600 transition-colors truncate max-w-xs">{{ $thread->title }}</a>
             <span>&rsaquo;</span>
-            <span class="text-gray-900 font-medium">Edit Topik</span>
+            <span class="text-gray-900 font-medium">Edit Topic</span>
         </nav>
 
         <!-- Page Header -->
         <x-page-header
-            title="Edit Topik Diskusi"
-            description="Perbarui informasi atau isi topik diskusi forum ini."
+            title="Edit Topic"
+            description="Update the details or content of this forum topic."
         />
 
         <!-- Form Card -->
@@ -23,9 +23,9 @@
 
                 <!-- Subject Category -->
                 <div>
-                    <x-label for="subject_id" value="Kategori Mata Pelajaran" required />
+                    <x-label for="subject_id" value="Subject Category" required />
                     <x-select id="subject_id" name="subject_id" class="mt-1" required>
-                        <option value="">-- Pilih Kategori Pelajaran --</option>
+                        <option value="">-- Select a subject category --</option>
                         @foreach ($subjects as $subject)
                             <option value="{{ $subject->id }}" @selected(old('subject_id', $thread->subject_id) == $subject->id)>
                                 {{ $subject->name }}
@@ -37,7 +37,7 @@
 
                 <!-- Title -->
                 <div>
-                    <x-label for="title" value="Judul Topik Diskusi" required />
+                    <x-label for="title" value="Topic Title" required />
                     <x-input
                         id="title"
                         name="title"
@@ -52,7 +52,7 @@
 
                 <!-- Content -->
                 <div>
-                    <x-label for="content" value="Isi Pembahasan / Pertanyaan" required />
+                    <x-label for="content" value="Discussion / Question" required />
                     <x-textarea
                         id="content"
                         name="content"
@@ -64,17 +64,7 @@
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="flex items-center justify-end gap-3 pt-4 border-t border-gray-100">
-                    <a
-                        href="{{ route('forum.threads.show', $thread) }}"
-                        class="rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
-                    >
-                        Batal
-                    </a>
-                    <x-button type="submit" variant="primary">
-                        Simpan Perubahan
-                    </x-button>
-                </div>
+                <x-form-actions :cancel="route('forum.threads.show', $thread)" submit="Save Changes" />
             </form>
         </x-card>
     </div>

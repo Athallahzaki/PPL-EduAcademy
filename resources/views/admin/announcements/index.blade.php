@@ -1,66 +1,85 @@
 <x-layouts.app title="System Announcements">
     <div class="space-y-6">
+        <!-- Page Header -->
         <x-page-header title="System Announcements" description="Create and manage announcements shown on student and instructor dashboards.">
             <x-slot:actions>
-                <a
-                    href="{{ route('admin.announcements.create') }}"
-                    class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-indigo-700"
-                >
+                <x-button :href="route('admin.announcements.create')">
                     <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
                     Create Announcement
-                </a>
+                </x-button>
             </x-slot:actions>
         </x-page-header>
 
-        <x-card class="p-4 sm:p-5">
-            <form method="GET" action="{{ route('admin.announcements.index') }}" class="grid grid-cols-1 items-end gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                <div>
-                    <x-label for="admin_id" value="Posted by" />
-                    <x-select id="admin_id" name="admin_id">
-                        <option value="">All administrators</option>
-                        @foreach ($admins as $admin)
-                            <option value="{{ $admin->id }}" @selected((string) ($filters['admin_id'] ?? '') === (string) $admin->id)>
-                                {{ $admin->name }}
-                            </option>
-                        @endforeach
-                    </x-select>
-                </div>
+        <!-- Status Chips -->
+        <div class="flex flex-wrap items-center gap-2.5">
+            <x-filter-chip
+                :href="route('admin.announcements.index', request()->except(['status', 'page']))"
+                tone="indigo"
+                :active="empty($filters['status'] ?? null)"
+                :count="$totalCount"
+            >All</x-filter-chip>
 
-                <div>
-                    <x-label for="period" value="Published" />
-                    <x-select id="period" name="period">
-                        <option value="">All dates</option>
-                        <option value="7_days" @selected(($filters['period'] ?? '') === '7_days')>Last 7 days</option>
-                        <option value="30_days" @selected(($filters['period'] ?? '') === '30_days')>Last 30 days</option>
-                        <option value="3_months" @selected(($filters['period'] ?? '') === '3_months')>Last 3 months</option>
-                        <option value="6_months" @selected(($filters['period'] ?? '') === '6_months')>Last 6 months</option>
-                    </x-select>
-                </div>
+            <x-filter-chip
+                :href="route('admin.announcements.index', array_merge(request()->except(['status', 'page']), ['status' => 'active']))"
+                tone="emerald"
+                dot
+                :active="($filters['status'] ?? null) === 'active'"
+                :count="$activeCount"
+            >Active</x-filter-chip>
 
-                <div>
-                    <x-label for="status" value="Status" />
-                    <x-select id="status" name="status">
-                        <option value="">All statuses</option>
-                        <option value="active" @selected(($filters['status'] ?? '') === 'active')>Active</option>
-                        <option value="inactive" @selected(($filters['status'] ?? '') === 'inactive')>Inactive</option>
-                    </x-select>
-                </div>
+            <x-filter-chip
+                :href="route('admin.announcements.index', array_merge(request()->except(['status', 'page']), ['status' => 'inactive']))"
+                tone="gray"
+                dot
+                :active="($filters['status'] ?? null) === 'inactive'"
+                :count="$inactiveCount"
+            >Inactive</x-filter-chip>
+        </div>
 
-                <div class="flex items-center justify-end gap-3">
-                    @if (request()->hasAny(['admin_id', 'period', 'status']))
-                        <a href="{{ route('admin.announcements.index') }}" class="text-xs font-medium text-gray-500 underline hover:text-gray-900">
-                            Reset filters
-                        </a>
-                    @endif
-                    <x-button type="submit">Filter</x-button>
-                </div>
-            </form>
-            <p class="mt-3 text-xs text-gray-500">
+        <!-- Filter Bar -->
+        <x-filter-bar
+            :action="route('admin.announcements.index')"
+            :active="request()->hasAny(['admin_id', 'period', 'status'])"
+            cols="lg:grid-cols-3"
+        >
+            <div>
+                <x-label for="admin_id" value="Posted by" />
+                <x-select id="admin_id" name="admin_id">
+                    <option value="">All administrators</option>
+                    @foreach ($admins as $admin)
+                        <option value="{{ $admin->id }}" @selected((string) ($filters['admin_id'] ?? '') === (string) $admin->id)>
+                            {{ $admin->name }}
+                        </option>
+                    @endforeach
+                </x-select>
+            </div>
+
+            <div>
+                <x-label for="period" value="Published" />
+                <x-select id="period" name="period">
+                    <option value="">All dates</option>
+                    <option value="7_days" @selected(($filters['period'] ?? '') === '7_days')>Last 7 days</option>
+                    <option value="30_days" @selected(($filters['period'] ?? '') === '30_days')>Last 30 days</option>
+                    <option value="3_months" @selected(($filters['period'] ?? '') === '3_months')>Last 3 months</option>
+                    <option value="6_months" @selected(($filters['period'] ?? '') === '6_months')>Last 6 months</option>
+                </x-select>
+            </div>
+
+            <div>
+                <x-label for="status" value="Status" />
+                <x-select id="status" name="status">
+                    <option value="">All statuses</option>
+                    <option value="active" @selected(($filters['status'] ?? '') === 'active')>Active</option>
+                    <option value="inactive" @selected(($filters['status'] ?? '') === 'inactive')>Inactive</option>
+                </x-select>
+            </div>
+
+            <x-slot:footer>
                 Announcements older than six months are archived and hidden from student and instructor dashboards.
-            </p>
-        </x-card>
+            </x-slot:footer>
+        </x-filter-bar>
 
         <x-table>
             <x-slot:headers>
@@ -85,38 +104,29 @@
                         {{ $announcement->admin?->name ?? 'Former administrator' }}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
-                        {{ $announcement->published_at?->format('M d, Y') ?? '—' }}
+                        {{ $announcement->published_at?->format('M d, Y') ?? '-' }}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                        @if ($announcement->isArchived())
-                            <span class="mb-1 inline-flex items-center rounded-full bg-amber-50 px-3 py-1 text-sm font-medium text-amber-700 ring-1 ring-inset ring-amber-600/20">Archived</span>
-                            <br>
-                        @endif
-                        @if ($announcement->is_active)
-                            <span class="inline-flex items-center rounded-full bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-700 ring-1 ring-inset ring-emerald-600/20">Active</span>
-                        @else
-                            <span class="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-700 ring-1 ring-inset ring-gray-600/20">Inactive</span>
-                        @endif
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-xs font-medium">
-                        <div class="flex items-center justify-end gap-3">
-                            <a
-                                href="{{ route('admin.announcements.edit', $announcement) }}"
-                                class="text-gray-600 hover:text-gray-900 font-semibold"
-                            >
-                                Edit
-                            </a>
-                            <form
-                                method="POST"
-                                action="{{ route('admin.announcements.destroy', $announcement) }}"
-                                onsubmit="return confirm('Delete this announcement? This action cannot be undone.');"
-                            >
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-rose-600 hover:text-rose-900 font-semibold">Delete</button>
-                            </form>
+                        <div class="flex flex-col items-start gap-1.5">
+                            @if ($announcement->isArchived())
+                                <x-badge variant="amber">Archived</x-badge>
+                            @endif
+                            @if ($announcement->is_active)
+                                <x-badge variant="active">Active</x-badge>
+                            @else
+                                <x-badge variant="gray">Inactive</x-badge>
+                            @endif
                         </div>
                     </td>
+                    <x-table.actions>
+                        <x-row-action :href="route('admin.announcements.edit', $announcement)">Edit</x-row-action>
+                        <x-row-action
+                            :action="route('admin.announcements.destroy', $announcement)"
+                            method="DELETE"
+                            variant="danger"
+                            confirm="Delete this announcement? This action cannot be undone."
+                        >Delete</x-row-action>
+                    </x-table.actions>
                 </tr>
             @empty
                 <x-table.empty colspan="5" message="No announcements have been created yet." />

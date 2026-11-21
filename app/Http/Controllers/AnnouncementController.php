@@ -52,7 +52,18 @@ class AnnouncementController extends Controller
             ->orderBy('name')
             ->get(['id', 'name']);
 
-        return view('admin.announcements.index', compact('announcements', 'admins', 'filters'));
+        $totalCount = Announcement::count();
+        $activeCount = Announcement::where('is_active', true)->count();
+        $inactiveCount = $totalCount - $activeCount;
+
+        return view('admin.announcements.index', compact(
+            'announcements',
+            'admins',
+            'filters',
+            'totalCount',
+            'activeCount',
+            'inactiveCount'
+        ));
     }
 
     public function create(): View

@@ -62,10 +62,7 @@
                     @error('is_active') <p class="mt-1 text-sm text-rose-600">{{ $message }}</p> @enderror
                 </div>
 
-                <div class="flex justify-end gap-3 border-t border-slate-100 pt-4">
-                    <a href="{{ route('admin.announcements.index') }}" class="rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">Cancel</a>
-                    <button type="submit" class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700">Create Announcement</button>
-                </div>
+                <x-form-actions :cancel="route('admin.announcements.index')" submit="Create Announcement" />
             </form>
         </div>
     </div>

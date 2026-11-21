@@ -106,7 +106,7 @@
 
             <!-- Right: Enrollment CTA Card -->
             <div class="space-y-6">
-                <x-card class="sticky top-6">
+                <x-card class="sticky top-24">
                     <x-slot:header>
                         <h3 class="text-base font-bold text-gray-900">Class Enrolment</h3>
                     </x-slot:header>
@@ -129,7 +129,7 @@
 
                         <div class="flex items-center justify-between pb-3 border-b border-gray-100">
                             <span class="font-medium text-gray-500">Subject</span>
-                            <span class="font-semibold text-gray-900">{{ $course->subject?->name ?? '—' }}</span>
+                            <span class="font-semibold text-gray-900">{{ $course->subject?->name ?? '-' }}</span>
                         </div>
 
                         <!-- CTA Button Form (§7.3) -->

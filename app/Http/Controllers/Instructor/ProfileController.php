@@ -53,7 +53,7 @@ class ProfileController extends Controller
         );
 
         return redirect()->route('instructor.profile.show')
-            ->with('success', 'Profil instruktur berhasil diperbarui.');
+            ->with('success', 'Instructor profile updated successfully.');
     }
 
     public function downloadCv(Request $request)

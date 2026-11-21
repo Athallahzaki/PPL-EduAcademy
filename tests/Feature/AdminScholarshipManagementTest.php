@@ -60,10 +60,10 @@ class AdminScholarshipManagementTest extends TestCase
         $response = $this->actingAs($admin)->get(route('admin.scholarships.index'));
 
         $response->assertOk()
-            ->assertSee('Listing Info Beasiswa')
+            ->assertSee('Scholarship Listings')
             ->assertSee('Beasiswa Prestasi Nasional 2026')
-            ->assertSee('50 Kursi')
-            ->assertSee('Dipublikasikan');
+            ->assertSee('50 seats')
+            ->assertSee('Published');
     }
 
     public function test_admin_can_create_and_publish_new_scholarship(): void
@@ -146,7 +146,7 @@ class AdminScholarshipManagementTest extends TestCase
         $response = $this->actingAs($admin)->get(route('admin.scholarships.edit', $scholarship));
 
         $response->assertOk()
-            ->assertSee('Ubah Info Beasiswa')
+            ->assertSee('Edit Scholarship')
             ->assertSee('Beasiswa yang Diedit')
             ->assertSee('45');
     }

@@ -60,12 +60,9 @@
                     description="You are not enrolled in any classes. Browse the catalog to find subjects that interest you!"
                     icon="academic-cap"
                 >
-                    <a
-                        href="{{ route('student.catalog.index') }}"
-                        class="rounded-lg bg-indigo-600 px-4 py-2 text-xs font-semibold text-white hover:bg-indigo-700 transition-colors"
-                    >
-                        Browse Course Catalog
-                    </a>
+                    <x-button :href="route('student.catalog.index')" size="sm">
+Browse Course Catalog
+</x-button>
                 </x-empty-state>
             @endif
         </div>
@@ -76,24 +73,18 @@
                 <div>
                     <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2">
                         <x-icon name="chat-alt-2" class="h-5 w-5 text-indigo-600" />
-                        <span>Diskusi Forum Komunitas</span>
+                        <span>Community Forum Discussions</span>
                     </h2>
-                    <p class="text-xs text-gray-500">Topik diskusi terbaru dari sesama siswa dan instruktur.</p>
+                    <p class="text-xs text-gray-500">Latest topics from fellow students and instructors.</p>
                 </div>
 
                 <div class="flex items-center gap-2">
-                    <a
-                        href="{{ route('forum.threads.create') }}"
-                        class="rounded-xl border border-gray-300 bg-white px-3 py-1.5 text-xs font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
-                    >
-                        Mulai Diskusi
-                    </a>
-                    <a
-                        href="{{ route('forum.threads.index') }}"
-                        class="rounded-xl bg-indigo-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-indigo-700 transition-colors"
-                    >
-                        Buka Forum &rarr;
-                    </a>
+                    <x-button :href="route('forum.threads.create')" variant="secondary" size="sm">
+Start a Discussion
+</x-button>
+                    <x-button :href="route('forum.threads.index')" size="sm">
+Open Forum &rarr;
+</x-button>
                 </div>
             </div>
 
@@ -104,7 +95,7 @@
                             <div>
                                 <div class="flex items-center justify-between text-[11px] text-gray-500 mb-2">
                                     <x-badge variant="indigo" size="sm">
-                                        {{ $thread->subject?->name ?? 'Umum' }}
+                                        {{ $thread->subject?->name ?? 'General' }}
                                     </x-badge>
                                     <span>{{ $thread->created_at->diffForHumans() }}</span>
                                 </div>
@@ -123,7 +114,7 @@
                                     {{ $thread->user?->name }}
                                 </span>
                                 <a href="{{ route('forum.threads.show', $thread) }}" class="font-semibold text-indigo-600 hover:text-indigo-800 transition-colors">
-                                    Baca &rarr;
+                                    Read &rarr;
                                 </a>
                             </div>
                         </div>
@@ -131,7 +122,7 @@
                 </div>
             @else
                 <div class="rounded-xl border border-dashed border-gray-200 bg-white p-6 text-center text-xs text-gray-500">
-                    Belum ada topik diskusi terbaru. Mulai diskusi pertama sekarang!
+                    No recent discussion topics yet. Start the first one now!
                 </div>
             @endif
         </div>

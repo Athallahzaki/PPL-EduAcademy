@@ -23,12 +23,12 @@ class UpdateThreadRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title.required' => 'Judul topik diskusi wajib diisi.',
-            'title.min' => 'Judul topik diskusi minimal 5 karakter.',
-            'subject_id.required' => 'Kategori mata pelajaran wajib dipilih.',
-            'subject_id.exists' => 'Kategori mata pelajaran tidak valid.',
-            'content.required' => 'Isi topik diskusi wajib diisi.',
-            'content.min' => 'Isi topik diskusi minimal 10 karakter.',
+            'title.required' => 'The topic title is required.',
+            'title.min' => 'The topic title must be at least 5 characters.',
+            'subject_id.required' => 'Please select a subject category.',
+            'subject_id.exists' => 'The selected subject category is invalid.',
+            'content.required' => 'The topic content is required.',
+            'content.min' => 'The topic content must be at least 10 characters.',
         ];
     }
 }

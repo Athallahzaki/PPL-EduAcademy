@@ -14,6 +14,9 @@ $variants = [
     'gray' => 'bg-gray-100 text-gray-700 ring-1 ring-inset ring-gray-500/20',
     'indigo' => 'bg-indigo-50 text-indigo-700 ring-1 ring-inset ring-indigo-600/20',
     'blue' => 'bg-sky-50 text-sky-700 ring-1 ring-inset ring-sky-600/20',
+    'rose' => 'bg-rose-50 text-rose-700 ring-1 ring-inset ring-rose-600/20',
+    'emerald' => 'bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-600/20',
+    'sky' => 'bg-sky-50 text-sky-700 ring-1 ring-inset ring-sky-600/20',
     'purple' => 'bg-purple-50 text-purple-700 ring-1 ring-inset ring-purple-600/20',
 ];
 

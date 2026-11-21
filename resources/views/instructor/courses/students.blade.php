@@ -1,4 +1,4 @@
-<x-instructor.course-layout :course="$course" title="Enrolled Students — {{ $course->title }}">
+<x-instructor.course-layout :course="$course" title="Enrolled Students - {{ $course->title }}">
     <div class="space-y-6">
         <!-- Sub-header & Search -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
