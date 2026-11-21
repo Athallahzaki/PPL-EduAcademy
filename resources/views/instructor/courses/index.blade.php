@@ -97,7 +97,7 @@
                         @if($course->subject)
                             <x-badge variant="indigo">{{ $course->subject->name }}</x-badge>
                         @else
-                            <span class="text-gray-400">—</span>
+                            <span class="text-gray-400">-</span>
                         @endif
                     </td>
 

@@ -104,7 +104,7 @@
                         {{ $announcement->admin?->name ?? 'Former administrator' }}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
-                        {{ $announcement->published_at?->format('M d, Y') ?? '—' }}
+                        {{ $announcement->published_at?->format('M d, Y') ?? '-' }}
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="flex flex-col items-start gap-1.5">

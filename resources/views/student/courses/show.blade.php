@@ -1,4 +1,4 @@
-<x-student.course-layout :course="$course" title="Overview — {{ $course->title }}">
+<x-student.course-layout :course="$course" title="Overview - {{ $course->title }}">
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Main: Overview & Future Content Card -->
         <div class="lg:col-span-2 space-y-6">

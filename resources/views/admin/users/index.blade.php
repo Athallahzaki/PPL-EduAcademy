@@ -124,7 +124,7 @@
                         @if ($user->onboarded_at)
                             <span class="text-emerald-600 font-bold" title="Onboarded at {{ $user->onboarded_at->format('Y-m-d H:i') }}">✓</span>
                         @else
-                            <span class="text-gray-400 font-bold">—</span>
+                            <span class="text-gray-400 font-bold">-</span>
                         @endif
                     </td>
 

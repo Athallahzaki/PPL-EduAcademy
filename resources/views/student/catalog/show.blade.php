@@ -129,7 +129,7 @@
 
                         <div class="flex items-center justify-between pb-3 border-b border-gray-100">
                             <span class="font-medium text-gray-500">Subject</span>
-                            <span class="font-semibold text-gray-900">{{ $course->subject?->name ?? '—' }}</span>
+                            <span class="font-semibold text-gray-900">{{ $course->subject?->name ?? '-' }}</span>
                         </div>
 
                         <!-- CTA Button Form (§7.3) -->
