@@ -1,80 +1,62 @@
 <x-layouts.app title="My Classes">
     <div class="space-y-6">
-        <!-- Header -->
+        <!-- Page Header -->
         <x-page-header title="My Classes" description="Create and manage your educational courses, curriculum modules, and enrolled students.">
             <x-slot:actions>
-                <a
-                    href="{{ route('instructor.courses.create') }}"
-                    class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 transition-colors"
-                >
-                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <x-button :href="route('instructor.courses.create')">
+                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
                     Create Class
-                </a>
+                </x-button>
             </x-slot:actions>
         </x-page-header>
 
-        <!-- Status Filter Chips (§6.1) -->
+        <!-- Status Chips -->
         <div class="flex flex-wrap items-center gap-2.5">
-            <a
-                href="{{ route('instructor.courses.index', array_filter(['q' => request('q')])) }}"
-                class="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all {{ !request('status') ? 'bg-indigo-600 text-white shadow-xs' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}"
-            >
-                All ({{ $totalCount }})
-            </a>
+            <x-filter-chip
+                :href="route('instructor.courses.index', array_filter(['q' => request('q')]))"
+                tone="indigo"
+                :active="! request('status')"
+                :count="$totalCount"
+            >All</x-filter-chip>
 
-            <a
-                href="{{ route('instructor.courses.index', array_filter(['status' => 'published', 'q' => request('q')])) }}"
-                class="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all {{ request('status') === 'published' ? 'bg-emerald-600 text-white shadow-xs' : 'bg-emerald-50 text-emerald-800 hover:bg-emerald-100 ring-1 ring-inset ring-emerald-600/20' }}"
-            >
-                Published ({{ $publishedCount }})
-            </a>
+            <x-filter-chip
+                :href="route('instructor.courses.index', array_filter(['status' => 'published', 'q' => request('q')]))"
+                tone="emerald"
+                dot
+                :active="request('status') === 'published'"
+                :count="$publishedCount"
+            >Published</x-filter-chip>
 
-            <a
-                href="{{ route('instructor.courses.index', array_filter(['status' => 'draft', 'q' => request('q')])) }}"
-                class="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all {{ request('status') === 'draft' ? 'bg-gray-700 text-white shadow-xs' : 'bg-gray-100 text-gray-800 hover:bg-gray-200' }}"
-            >
-                Draft ({{ $draftCount }})
-            </a>
+            <x-filter-chip
+                :href="route('instructor.courses.index', array_filter(['status' => 'draft', 'q' => request('q')]))"
+                tone="gray"
+                dot
+                :active="request('status') === 'draft'"
+                :count="$draftCount"
+            >Draft</x-filter-chip>
 
-            <a
-                href="{{ route('instructor.courses.index', array_filter(['status' => 'archived', 'q' => request('q')])) }}"
-                class="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all {{ request('status') === 'archived' ? 'bg-amber-600 text-white shadow-xs' : 'bg-amber-50 text-amber-800 hover:bg-amber-100 ring-1 ring-inset ring-amber-600/20' }}"
-            >
-                Archived ({{ $archivedCount }})
-            </a>
-
-            @if(request()->hasAny(['q', 'status']))
-                <a
-                    href="{{ route('instructor.courses.index') }}"
-                    class="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-900 underline ml-2"
-                >
-                    Reset filters
-                </a>
-            @endif
+            <x-filter-chip
+                :href="route('instructor.courses.index', array_filter(['status' => 'archived', 'q' => request('q')]))"
+                tone="amber"
+                dot
+                :active="request('status') === 'archived'"
+                :count="$archivedCount"
+            >Archived</x-filter-chip>
         </div>
 
-        <!-- Search Bar -->
-        <x-card class="p-4">
-            <form method="GET" action="{{ route('instructor.courses.index') }}" class="flex flex-col sm:flex-row gap-3">
-                @if(request('status'))
-                    <input type="hidden" name="status" value="{{ request('status') }}">
-                @endif
-                <div class="flex-1">
-                    <x-input
-                        id="q"
-                        type="search"
-                        name="q"
-                        :value="request('q')"
-                        placeholder="Search your classes by title..."
-                    />
-                </div>
-                <x-button type="submit" size="md">
-                    Search
-                </x-button>
-            </form>
-        </x-card>
+        <!-- Filter Bar -->
+        <x-filter-bar
+            :action="route('instructor.courses.index')"
+            :active="request()->hasAny(['q', 'status'])"
+            cols="lg:grid-cols-1"
+        >
+            @if (request('status'))
+                <input type="hidden" name="status" value="{{ request('status') }}">
+            @endif
+            <x-search-field label="Search" placeholder="Search your classes by title..." />
+        </x-filter-bar>
 
         <!-- Classes Table -->
         <x-table>
@@ -144,33 +126,14 @@
                     </td>
 
                     <!-- Actions -->
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-xs font-semibold">
-                        <div class="flex items-center justify-end gap-2">
-                            <a
-                                href="{{ route('instructor.courses.show', $course) }}"
-                                class="rounded-lg bg-indigo-50 px-2.5 py-1 text-indigo-700 hover:bg-indigo-100 transition-colors"
-                            >
-                                Manage
-                            </a>
-                            <a
-                                href="{{ route('instructor.courses.edit', $course) }}"
-                                class="rounded-lg border border-gray-300 bg-white px-2.5 py-1 text-gray-700 hover:bg-gray-50 transition-colors"
-                            >
-                                Edit
-                            </a>
-                        </div>
-                    </td>
+                <x-table.actions>
+                    <x-row-action :href="route('instructor.courses.show', $course)" variant="primary">Manage</x-row-action>
+                    <x-row-action :href="route('instructor.courses.edit', $course)">Edit</x-row-action>
+                </x-table.actions>
                 </tr>
             @empty
                 <x-table.empty colspan="7" message="No classes found." description="Create a new class to start building your course curriculum.">
-                    <x-slot>
-                        <a
-                            href="{{ route('instructor.courses.create') }}"
-                            class="inline-flex items-center gap-1.5 rounded-lg bg-indigo-600 px-3.5 py-1.5 text-xs font-semibold text-white hover:bg-indigo-700"
-                        >
-                            Create your first class
-                        </a>
-                    </x-slot>
+                    <x-button :href="route('instructor.courses.create')" size="sm">Create your first class</x-button>
                 </x-table.empty>
             @endforelse
         </x-table>

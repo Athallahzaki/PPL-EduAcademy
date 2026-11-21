@@ -42,13 +42,15 @@ class ScholarshipController extends Controller
         $publishedCount = Scholarship::where('status', ScholarshipStatus::Published->value)->count();
         $totalQuota = Scholarship::where('status', ScholarshipStatus::Published->value)->sum('quota');
         $closedCount = Scholarship::where('status', ScholarshipStatus::Closed->value)->count();
+        $draftCount = Scholarship::where('status', ScholarshipStatus::Draft->value)->count();
 
         return view('admin.scholarships.index', compact(
             'scholarships',
             'totalCount',
             'publishedCount',
             'totalQuota',
-            'closedCount'
+            'closedCount',
+            'draftCount'
         ));
     }
 
