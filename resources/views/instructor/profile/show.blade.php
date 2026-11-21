@@ -1,9 +1,5 @@
 <x-layouts.app title="Instructor Profile">
     <div class="mx-auto max-w-5xl space-y-6">
-        @if (session('success'))
-            <div class="rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800">{{ session('success') }}</div>
-        @endif
-
         <div class="flex flex-col gap-4 rounded-2xl bg-gradient-to-r from-indigo-700 to-indigo-900 p-6 text-white sm:flex-row sm:items-center sm:justify-between">
             <div>
                 <p class="text-sm font-medium text-indigo-200">INSTRUCTOR PROFILE</p>
@@ -23,7 +19,7 @@
                     <h2 class="text-lg font-bold text-gray-900">Expertise & Specialization</h2>
                     <div class="mt-3 flex flex-wrap gap-2">
                         @forelse (preg_split('/[,;]+/', $profile?->expertise ?? '', -1, PREG_SPLIT_NO_EMPTY) as $skill)
-                            <span class="rounded-full bg-indigo-50 px-3 py-1.5 text-sm font-medium text-indigo-700">{{ trim($skill) }}</span>
+                            <x-badge variant="indigo" size="lg">{{ trim($skill) }}</x-badge>
                         @empty
                             <p class="text-sm text-gray-500">No expertise added yet.</p>
                         @endforelse

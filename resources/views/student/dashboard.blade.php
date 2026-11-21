@@ -60,12 +60,9 @@
                     description="You are not enrolled in any classes. Browse the catalog to find subjects that interest you!"
                     icon="academic-cap"
                 >
-                    <a
-                        href="{{ route('student.catalog.index') }}"
-                        class="rounded-lg bg-indigo-600 px-4 py-2 text-xs font-semibold text-white hover:bg-indigo-700 transition-colors"
-                    >
-                        Browse Course Catalog
-                    </a>
+                    <x-button :href="route('student.catalog.index')" size="sm">
+Browse Course Catalog
+</x-button>
                 </x-empty-state>
             @endif
         </div>
@@ -82,18 +79,12 @@
                 </div>
 
                 <div class="flex items-center gap-2">
-                    <a
-                        href="{{ route('forum.threads.create') }}"
-                        class="rounded-xl border border-gray-300 bg-white px-3 py-1.5 text-xs font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
-                    >
-                        Start a Discussion
-                    </a>
-                    <a
-                        href="{{ route('forum.threads.index') }}"
-                        class="rounded-xl bg-indigo-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-indigo-700 transition-colors"
-                    >
-                        Open Forum &rarr;
-                    </a>
+                    <x-button :href="route('forum.threads.create')" variant="secondary" size="sm">
+Start a Discussion
+</x-button>
+                    <x-button :href="route('forum.threads.index')" size="sm">
+Open Forum &rarr;
+</x-button>
                 </div>
             </div>
 

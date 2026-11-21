@@ -2,12 +2,9 @@
     <div class="max-w-2xl mx-auto space-y-6">
         <x-page-header title="Edit User: {{ $user->name }}" description="Update personal details and manage access role for this account.">
             <x-slot:actions>
-                <a
-                    href="{{ route('admin.users.show', $user) }}"
-                    class="rounded-lg border border-gray-300 bg-white px-3.5 py-1.5 text-xs font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
-                >
-                    &larr; Back to Details
-                </a>
+                <x-button :href="route('admin.users.show', $user)" variant="secondary" size="sm">
+&larr; Back to Details
+</x-button>
             </x-slot:actions>
         </x-page-header>
 
@@ -77,17 +74,7 @@
                 </div>
 
                 <!-- Submit / Cancel -->
-                <div class="flex items-center justify-end gap-3 pt-4 border-t border-gray-100">
-                    <a
-                        href="{{ route('admin.users.show', $user) }}"
-                        class="rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
-                    >
-                        Cancel
-                    </a>
-                    <x-button type="submit">
-                        Save Changes
-                    </x-button>
-                </div>
+                <x-form-actions :cancel="route('admin.users.show', $user)" submit="Save Changes" />
             </form>
         </x-card>
     </div>

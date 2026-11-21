@@ -65,17 +65,7 @@
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="flex items-center justify-end gap-3 pt-4 border-t border-gray-100">
-                    <a
-                        href="{{ route('forum.threads.index') }}"
-                        class="rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
-                    >
-                        Cancel
-                    </a>
-                    <x-button type="submit" variant="primary">
-                        Publish Topic
-                    </x-button>
-                </div>
+                <x-form-actions :cancel="route('forum.threads.index')" submit="Publish Topic" />
             </form>
         </x-card>
     </div>

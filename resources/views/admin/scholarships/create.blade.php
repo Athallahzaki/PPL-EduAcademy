@@ -113,26 +113,7 @@
                 </div>
 
                 <!-- Form Actions -->
-                <div class="flex items-center justify-end gap-3 border-t border-gray-100 pt-5">
-                    <a
-                        href="{{ route('admin.scholarships.index') }}"
-                        class="inline-flex items-center gap-1.5 rounded-xl border border-gray-300 bg-white px-4 py-2.5 text-sm font-semibold text-gray-700 shadow-2xs transition hover:bg-gray-50 hover:text-gray-900"
-                    >
-                        <svg class="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                        <span>Cancel</span>
-                    </a>
-                    <button
-                        type="submit"
-                        class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    >
-                        <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                        </svg>
-                        <span>Publish Scholarship</span>
-                    </button>
-                </div>
+                <x-form-actions :cancel="route('admin.scholarships.index')" submit="Publish Scholarship" />
             </form>
         </div>
     </div>

@@ -46,10 +46,7 @@
                 <p class="mt-2 text-xs text-gray-500">PDF only, maximum 2 MB. Leave empty to keep your current CV.</p>
             </div>
 
-            <div class="flex flex-col-reverse gap-3 border-t border-gray-100 pt-5 sm:flex-row sm:justify-end">
-                <a href="{{ route('instructor.profile.show') }}" class="inline-flex justify-center rounded-xl border border-gray-300 px-5 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50">Cancel</a>
-                <button type="submit" class="inline-flex justify-center rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700">Save Changes</button>
-            </div>
+            <x-form-actions :cancel="route('instructor.profile.show')" submit="Save Changes" />
         </form>
     </div>
 </x-layouts.app>
