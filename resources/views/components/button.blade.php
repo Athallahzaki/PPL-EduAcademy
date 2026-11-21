@@ -1,7 +1,7 @@
-@props(['type' => 'submit', 'variant' => 'primary', 'size' => 'md'])
+@props(['type' => 'submit', 'variant' => 'primary', 'size' => 'md', 'href' => null])
 
 @php
-$baseClasses = 'inline-flex items-center justify-center font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg';
+$baseClasses = 'inline-flex items-center justify-center gap-2 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg';
 
 $sizes = [
     'xs' => 'px-2.5 py-1 text-xs',
@@ -22,7 +22,12 @@ $variants = [
 $classes = $baseClasses . ' ' . ($sizes[$size] ?? $sizes['md']) . ' ' . ($variants[$variant] ?? $variants['primary']);
 @endphp
 
-<button type="{{ $type }}" {{ $attributes->merge(['class' => $classes]) }}>
-    {{ $slot }}
-</button>
-
+@if ($href)
+    <a href="{{ $href }}" {{ $attributes->merge(['class' => $classes]) }}>
+        {{ $slot }}
+    </a>
+@else
+    <button type="{{ $type }}" {{ $attributes->merge(['class' => $classes]) }}>
+        {{ $slot }}
+    </button>
+@endif

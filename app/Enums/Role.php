@@ -17,6 +17,15 @@ enum Role: string
         };
     }
 
+    public function badgeColor(): string
+    {
+        return match ($this) {
+            self::Admin => 'amber',
+            self::Instructor => 'purple',
+            self::Student => 'gray',
+        };
+    }
+
     public function dashboardRoute(): string
     {
         return match ($this) {
@@ -26,4 +35,3 @@ enum Role: string
         };
     }
 }
-
