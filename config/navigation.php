@@ -40,9 +40,9 @@ return [
                 'icon' => 'calendar',
             ],
             [
-                'label' => 'Forum Moderation',
+                'label' => 'Discussion Forum',
                 'route' => 'admin.forums.index',
-                'active' => 'admin.forums.*',
+                'active' => ['admin.forums.*', 'forum.*'],
                 'icon' => 'chat-alt-2',
             ],
             [
@@ -68,14 +68,14 @@ return [
             ],
             [
                 'label' => 'Class Catalog',
-                'route' => 'student.classes.index',
-                'active' => 'student.classes.*',
+                'route' => 'student.catalog.index',
+                'active' => 'student.catalog.*',
                 'icon' => 'book-open',
             ],
             [
                 'label' => 'My Classes',
-                'route' => 'student.my-classes.index',
-                'active' => 'student.my-classes.*',
+                'route' => 'student.courses.index',
+                'active' => 'student.courses.*',
                 'icon' => 'collection',
             ],
             [
@@ -87,7 +87,7 @@ return [
             [
                 'label' => 'Discussion Forum',
                 'route' => 'student.forums.index',
-                'active' => 'student.forums.*',
+                'active' => ['student.forums.*', 'forum.*'],
                 'icon' => 'chat-alt-2',
             ],
             [
@@ -125,8 +125,8 @@ return [
             ],
             [
                 'label' => 'My Classes',
-                'route' => 'instructor.classes.index',
-                'active' => 'instructor.classes.*',
+                'route' => 'instructor.courses.index',
+                'active' => 'instructor.courses.*',
                 'icon' => 'book-open',
             ],
             [
@@ -168,7 +168,7 @@ return [
             [
                 'label' => 'Discussion Forum',
                 'route' => 'instructor.forums.index',
-                'active' => 'instructor.forums.*',
+                'active' => ['instructor.forums.*', 'forum.*'],
                 'icon' => 'chat-alt-2',
             ],
         ],

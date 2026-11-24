@@ -11,6 +11,11 @@
         @if($description)
             <p class="mt-1 text-xs text-gray-500">{{ $description }}</p>
         @endif
+        @if($slot->isNotEmpty())
+            <div class="mt-4 flex justify-center gap-3">
+                {{ $slot }}
+            </div>
+        @endif
     </td>
 </tr>
 

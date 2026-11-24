@@ -3,18 +3,8 @@
         <!-- Page Header -->
         <x-page-header title="{{ $user->name }}" description="Detailed account overview and management actions.">
             <x-slot:actions>
-                <a
-                    href="{{ route('admin.users.index') }}"
-                    class="rounded-lg border border-gray-300 bg-white px-3.5 py-2 text-xs font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
-                >
-                    &larr; Back to Accounts
-                </a>
-                <a
-                    href="{{ route('admin.users.edit', $user) }}"
-                    class="rounded-lg bg-indigo-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-indigo-700 transition-colors"
-                >
-                    Edit Details
-                </a>
+                <x-button :href="route('admin.users.index')" variant="secondary" size="sm">&larr; Back to Accounts</x-button>
+                <x-button :href="route('admin.users.edit', $user)" size="sm">Edit Details</x-button>
             </x-slot:actions>
         </x-page-header>
 
@@ -24,7 +14,7 @@
                 <div class="flex items-center justify-between">
                     <h3 class="text-base font-semibold text-gray-900">Account Overview</h3>
                     <div class="flex items-center gap-2">
-                        <x-badge :variant="$user->role?->value ?? 'gray'">
+                        <x-badge :variant="$user->role?->badgeColor() ?? 'gray'">
                             {{ $user->role?->label() ?? ucfirst($user->role ?? '') }}
                         </x-badge>
                         <x-badge :variant="$user->status?->badgeColor() ?? 'gray'">

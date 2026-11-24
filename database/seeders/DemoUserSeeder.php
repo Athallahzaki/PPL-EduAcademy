@@ -110,6 +110,44 @@ class DemoUserSeeder extends Seeder
                 'education_level' => 'senior_high',
             ]
         );
+
+        // 7. Instructor, suspended (owning one published class, used to verify S2-11 §10)
+        $suspendedInstructor = User::updateOrCreate(
+            ['email' => 'instructor.suspended@eduacademy.test'],
+            [
+                'name' => 'Dr. Robert Vance',
+                'password' => $password,
+                'role' => Role::Instructor,
+                'status' => AccountStatus::Suspended,
+                'must_change_password' => false,
+                'onboarded_at' => now(),
+            ]
+        );
+
+        $suspendedInstructor->instructorProfile()->updateOrCreate(
+            ['user_id' => $suspendedInstructor->id],
+            [
+                'bio' => 'Distributed systems researcher and cloud infrastructure architect.',
+                'expertise' => 'Cloud Infrastructure',
+                'cv_path' => 'instructor-cvs/demo-robert-vance-cv.pdf',
+                'portfolio_url' => 'https://robertvance.cloud',
+            ]
+        );
+
+        $science = \App\Models\Subject::where('slug', 'science')->first();
+        \App\Models\Course::updateOrCreate(
+            [
+                'instructor_id' => $suspendedInstructor->id,
+                'title' => 'Introduction to Cloud Computing & Microservices',
+            ],
+            [
+                'subject_id' => $science?->id ?? 1,
+                'description' => 'Understand cloud architectures, container orchestration, and serverless fundamentals.',
+                'level' => \App\Enums\CourseLevel::Beginner,
+                'status' => \App\Enums\CourseStatus::Published,
+                'banner_path' => null,
+            ]
+        );
     }
 }
 

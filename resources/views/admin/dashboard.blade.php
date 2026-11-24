@@ -15,19 +15,24 @@
                     Manage Accounts & Roles
                 </a>
                 <a
-                    href="{{ route('admin.users.create') }}"
-                    class="inline-flex items-center gap-2 rounded-xl bg-indigo-600/80 hover:bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white border border-indigo-400/40 transition-colors"
+                    href="{{ route('admin.scholarships.index') }}"
+                    class="inline-flex items-center gap-2 rounded-xl bg-white/10 hover:bg-white/20 px-4 py-2.5 text-sm font-semibold text-white border border-white/20 transition-colors"
                 >
-                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                    </svg>
-                    New User Account
+                    <x-icon name="academic-cap" class="h-4 w-4 text-white" />
+                    Scholarship Info ({{ $publishedScholarships }})
+                </a>
+                <a
+                    href="{{ route('forum.threads.index') }}"
+                    class="inline-flex items-center gap-2 rounded-xl bg-white/10 hover:bg-white/20 px-4 py-2.5 text-sm font-semibold text-white border border-white/20 transition-colors"
+                >
+                    <x-icon name="chat-alt-2" class="h-4 w-4 text-white" />
+                    Community Forum
                 </a>
             </div>
         </div>
 
         <!-- Metric Stat Cards -->
-        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-5">
             <!-- Total Users -->
             <div class="bg-white rounded-xl border border-gray-200/80 p-5 shadow-sm">
                 <div class="flex items-center justify-between">
@@ -87,6 +92,18 @@
                 <p class="mt-3 text-3xl font-bold tracking-tight text-gray-900">{{ $activeInstructors }}</p>
                 <div class="mt-2 text-xs text-gray-500">Teaching faculty members</div>
             </div>
+
+            <!-- Published Classes -->
+            <div class="bg-white rounded-xl border border-gray-200/80 p-5 shadow-sm">
+                <div class="flex items-center justify-between">
+                    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Active Classes</p>
+                    <span class="rounded-lg bg-violet-50 p-2 text-violet-600">
+                        <x-icon name="collection" class="h-5 w-5" />
+                    </span>
+                </div>
+                <p class="mt-3 text-3xl font-bold tracking-tight text-gray-900">{{ $publishedCourses }}</p>
+                <div class="mt-2 text-xs text-gray-500">Published classes in the catalog</div>
+            </div>
         </div>
 
         <!-- Overview Content Cards -->
@@ -117,14 +134,45 @@
 
             <x-card>
                 <x-slot:header>
-                    <h3 class="text-sm font-semibold text-gray-900">Upcoming Features (Sprint 2 - 4)</h3>
+                    <h3 class="text-sm font-semibold text-gray-900">Sprint Features Progress</h3>
                 </x-slot:header>
-                <div class="space-y-2 text-xs text-gray-500">
-                    <p>• <strong>PBI-01:</strong> Class Catalog & Course Enrolment</p>
-                    <p>• <strong>PBI-02:</strong> Module Content & Chapter Video Player</p>
-                    <p>• <strong>PBI-03:</strong> Assignment Submissions & Grading</p>
-                    <p>• <strong>PBI-05:</strong> Scholarships Announcement & Verification</p>
-                    <p>• <strong>PBI-08:</strong> Live Interactive Sessions & Discussions</p>
+                <div class="space-y-2 text-xs text-gray-600">
+                    <div class="flex items-center justify-between py-1 border-b border-gray-100">
+                        <span><strong>PBI-01:</strong> Scholarship Info Listing</span>
+                        <x-badge variant="active">Operational</x-badge>
+                    </div>
+                    <div class="flex items-center justify-between py-1 border-b border-gray-100">
+                        <span><strong>PBI-04:</strong> Instructor Profile & Specialization</span>
+                        <x-badge variant="active">Operational</x-badge>
+                    </div>
+                    <div class="flex items-center justify-between py-1 border-b border-gray-100">
+                        <span><strong>PBI-07:</strong> User & Role Management</span>
+                        <x-badge variant="active">Operational</x-badge>
+                    </div>
+                    <div class="flex items-center justify-between py-1 border-b border-gray-100">
+                        <span><strong>PBI-08:</strong> System Announcements</span>
+                        <x-badge variant="active">Operational</x-badge>
+                    </div>
+                    <div class="flex items-center justify-between py-1 border-b border-gray-100">
+                        <span><strong>PBI-11:</strong> Master Classes / Courses</span>
+                        <x-badge variant="active">Operational</x-badge>
+                    </div>
+                    <div class="flex items-center justify-between py-1 border-b border-gray-100">
+                        <span><strong>PBI-14:</strong> Discussion Threads</span>
+                        <x-badge variant="active">Operational</x-badge>
+                    </div>
+                    <div class="flex items-center justify-between py-1 border-b border-gray-100">
+                        <span><strong>PBI-15:</strong> Threaded Comments & Replies</span>
+                        <x-badge variant="pending">Sprint 3</x-badge>
+                    </div>
+                    <div class="flex items-center justify-between py-1 border-b border-gray-100">
+                        <span><strong>PBI-16:</strong> Forum Moderation & Reports</span>
+                        <x-badge variant="pending">Sprint 4</x-badge>
+                    </div>
+                    <div class="flex items-center justify-between py-1">
+                        <span><strong>PBI-02:</strong> Scholarship Registration & Selection</span>
+                        <x-badge variant="pending">Sprint 3</x-badge>
+                    </div>
                 </div>
             </x-card>
         </div>

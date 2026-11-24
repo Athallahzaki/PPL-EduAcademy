@@ -77,6 +77,42 @@ class User extends Authenticatable
     }
 
     /**
+     * Courses taught by the instructor.
+     */
+    public function courses(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Course::class, 'instructor_id');
+    }
+
+    /**
+     * Courses the student is enrolled in.
+     */
+    public function enrolledCourses(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Course::class, 'enrollments', 'student_id', 'course_id')
+            ->withPivot('enrolled_at', 'completed_at')
+            ->withTimestamps();
+    }
+
+    /**
+     * Discussion threads started by this user.
+     */
+    public function threads(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(DiscussionThread::class);
+    }
+
+    /**
+     * Determine if the student is enrolled in a given course.
+     */
+    public function isEnrolledIn(Course|int $course): bool
+    {
+        $courseId = $course instanceof Course ? $course->id : $course;
+
+        return $this->enrolledCourses()->where('courses.id', $courseId)->exists();
+    }
+
+    /**
      * Check if user is an admin.
      */
     public function isAdmin(): bool
