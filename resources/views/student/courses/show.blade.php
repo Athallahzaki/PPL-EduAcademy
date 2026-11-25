@@ -12,12 +12,49 @@
                 </div>
             </x-card>
 
-            <!-- Learning Content Empty State (§7.5: No fake data) -->
-            <x-empty-state
-                title="Learning content will appear here"
-                description="Your instructor is preparing lesson modules, video lectures, and quizzes for this class (Sprint 3: PBI-12 & PBI-13). Check back soon!"
-                icon="collection"
-            />
+            <!-- Curriculum Outline Summary (§7.3) -->
+            @if(isset($publishedModules) && $publishedModules->isNotEmpty())
+                <x-card>
+                    <x-slot:header>
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-base font-bold text-gray-900">Curriculum Outline</h3>
+                            <a href="{{ route('student.courses.modules.index', $course) }}"
+                                class="inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 hover:text-indigo-800">
+                                View all content &rarr;
+                            </a>
+                        </div>
+                    </x-slot:header>
+
+                    <div class="space-y-3">
+                        <ul class="divide-y divide-gray-100 text-xs">
+                            @foreach($publishedModules as $index => $mod)
+                                <li class="py-2.5 flex items-center justify-between">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-5 font-mono text-gray-400 font-medium">{{ $index + 1 }}.</span>
+                                        <span class="font-semibold text-gray-900">{{ $mod->title }}</span>
+                                    </div>
+                                    <span class="text-gray-500">
+                                        {{ $mod->chapters_count }} {{ \Illuminate\Support\Str::plural('lesson', $mod->chapters_count) }}
+                                    </span>
+                                </li>
+                            @endforeach
+                        </ul>
+
+                        <div class="pt-3 border-t border-gray-100">
+                            <a href="{{ route('student.courses.modules.index', $course) }}"
+                                class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg shadow-xs transition-colors">
+                                Go to Learning Content &rarr;
+                            </a>
+                        </div>
+                    </div>
+                </x-card>
+            @else
+                <x-empty-state
+                    title="No content published yet"
+                    description="Your instructor has not published any content yet."
+                    icon="collection"
+                />
+            @endif
         </div>
 
         <!-- Right Sidebar: Instructor Info -->

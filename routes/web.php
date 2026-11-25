@@ -60,6 +60,16 @@ Route::middleware(['auth', 'account.active', 'password.changed', 'onboarded'])->
         Route::resource('courses', Instructor\CourseController::class);
         Route::patch('courses/{course}/status', [Instructor\CourseStatusController::class, 'update'])->name('courses.status');
         Route::get('courses/{course}/students', [Instructor\CourseStudentController::class, 'index'])->name('courses.students');
+
+        // Curriculum Management (PBI-12)
+        Route::resource('courses.modules', Instructor\ModuleController::class)->except(['show'])->scoped();
+        Route::patch('courses/{course}/modules/{module}/move', [Instructor\ModuleController::class, 'move'])->name('courses.modules.move');
+        Route::patch('courses/{course}/modules/{module}/publish', [Instructor\ModuleController::class, 'publish'])->name('courses.modules.publish');
+
+        Route::resource('courses.modules.chapters', Instructor\ChapterController::class)->scoped();
+        Route::patch('courses/{course}/modules/{module}/chapters/{chapter}/move', [Instructor\ChapterController::class, 'move'])->name('courses.modules.chapters.move');
+        Route::patch('courses/{course}/modules/{module}/chapters/{chapter}/publish', [Instructor\ChapterController::class, 'publish'])->name('courses.modules.chapters.publish');
+
         Route::get('forums', [Forum\ThreadController::class, 'index'])->name('forums.index');
     });
 
@@ -71,6 +81,12 @@ Route::middleware(['auth', 'account.active', 'password.changed', 'onboarded'])->
         Route::post('courses/{course}/enroll', [Student\EnrollmentController::class, 'store'])->name('courses.enroll');
         Route::get('courses', [Student\MyCourseController::class, 'index'])->name('courses.index');
         Route::get('courses/{course}', [Student\MyCourseController::class, 'show'])->name('courses.show');
+
+        // Course Content & Reader (PBI-12)
+        Route::get('courses/{course}/content', [Student\CourseContentController::class, 'index'])->name('courses.modules.index');
+        Route::get('courses/{course}/modules/{module}/chapters/{chapter}', [Student\CourseContentController::class, 'chapter'])
+            ->scopeBindings()->name('courses.modules.chapters.show');
+
         Route::get('forums', [Forum\ThreadController::class, 'index'])->name('forums.index');
     });
 

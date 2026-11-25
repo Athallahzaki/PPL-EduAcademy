@@ -40,7 +40,14 @@ class MyCourseController extends Controller
 
         $course->load(['subject', 'instructor.instructorProfile'])->loadCount('enrollments');
 
-        return view('student.courses.show', compact('course'));
+        // Compact outline for student overview (§7.3)
+        $publishedModules = $course->modules()
+            ->published()
+            ->withCount(['chapters' => fn ($q) => $q->published()])
+            ->orderBy('position')
+            ->get();
+
+        return view('student.courses.show', compact('course', 'publishedModules'));
     }
 }
 
