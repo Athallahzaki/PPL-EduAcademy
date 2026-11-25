@@ -102,7 +102,18 @@ class CourseController extends Controller
 
         $course->load(['subject', 'instructor'])->loadCount('enrollments');
 
-        return view('instructor.courses.show', compact('course'));
+        $modulesCount = $course->modules()->count();
+        $publishedModulesCount = $course->modules()->published()->count();
+        $chaptersCount = $course->chapters()->count();
+        $publishedChaptersCount = $course->chapters()->where('chapters.is_published', true)->count();
+
+        return view('instructor.courses.show', compact(
+            'course',
+            'modulesCount',
+            'publishedModulesCount',
+            'chaptersCount',
+            'publishedChaptersCount'
+        ));
     }
 
     /**

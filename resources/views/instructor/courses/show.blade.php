@@ -13,12 +13,36 @@
                 </div>
             </x-card>
 
-            <!-- Sprint 3 Placeholder Notice -->
-            <x-empty-state
-                title="Curriculum Modules & Materials"
-                description="Modules, chapters, and downloadable video lessons are coming in Sprint 3 (PBI-12). When available, the Modules tab will appear above automatically."
-                icon="collection"
-            />
+            <!-- Curriculum Overview Card (§6.7) -->
+            <x-card>
+                <x-slot:header>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-base font-bold text-gray-900">Curriculum</h3>
+                        <a href="{{ route('instructor.courses.modules.index', $course) }}"
+                            class="inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 hover:text-indigo-800">
+                            Go to Curriculum &rarr;
+                        </a>
+                    </div>
+                </x-slot:header>
+
+                <div class="space-y-4">
+                    <p class="text-sm text-gray-700">
+                        <strong>Modules:</strong> {{ $modulesCount ?? 0 }} ({{ $publishedModulesCount ?? 0 }} published)
+                        <span class="text-gray-300 mx-2">&middot;</span>
+                        <strong>Chapters:</strong> {{ $chaptersCount ?? 0 }} ({{ $publishedChaptersCount ?? 0 }} published)
+                    </p>
+
+                    <div>
+                        <a href="{{ route('instructor.courses.modules.index', $course) }}"
+                            class="inline-flex items-center gap-2 px-4 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-semibold rounded-lg border border-indigo-200 transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+                            </svg>
+                            Manage Modules & Chapters
+                        </a>
+                    </div>
+                </div>
+            </x-card>
         </div>
 
         <!-- Sidebar Meta Details -->
