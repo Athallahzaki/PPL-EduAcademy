@@ -165,3 +165,16 @@ php vendor/phpunit/phpunit/phpunit
 
 #### PBI-14 Discussion Threads
 - Students, instructors and admins browse threads at `/forum/threads` (filter by subject). Users create, edit and delete their own threads; admins can also edit and delete any thread. Categories use the shared `subjects` table through `subject_id`. Replies (PBI-15) and reporting/moderation (PBI-16) arrive in later sprints.
+
+### Sprint 3 (Part 1): PBI-12 Modules & Chapters
+
+#### PBI-12 Curriculum Modules & Chapters
+- **Curriculum Architecture**: Two-level structure under courses: **Course → Module → Chapter**. Modules serve as thematic grouping units, and Chapters contain the actual text or video materials.
+- **Chapter Content Types**:
+  - `text`: Written in Markdown, rendered safely via `App\Support\MarkdownRenderer` using Laravel's CommonMark with `html_input => 'strip'`, `allow_unsafe_links => false`, and `ExternalLinkExtension` (external links get `target="_blank"` and `rel="noopener noreferrer nofollow"`).
+  - `video`: URL-based video lessons. YouTube (standard, youtu.be, shorts, embed) and Vimeo URLs are parsed server-side by `App\Support\VideoEmbed` and embedded cleanly using extracted IDs only (no raw URLs reach iframe `src`). Other valid URLs render as external link buttons. Video chapters also support optional Markdown lesson notes.
+- **Positioning & Ordering**: Reordering via Up/Down controls backed by the `App\Models\Concerns\HasPosition` trait. Positions are maintained 1..n contiguous within their parent; deleting an item automatically re-numbers remaining siblings inside database transactions.
+- **Draft & Publish Visibility**: Items default to draft status (`is_published = false`). A chapter is visible to enrolled students only when both the chapter and its parent module are published (`isVisibleToStudents()`). Instructors can preview draft chapters at any time.
+- **Student Reader Experience**: Enrolled students view published course content through the **Content** tab, with a **Start Learning** quick action, sanitized Markdown rendering, and contiguous **Previous / Next** chapter navigation that traverses module boundaries while skipping hidden drafts.
+- **PBI-13 Integration Hook**: `Module::canBeDeleted()` and `deletionBlockedReason()` provide non-breaking extension points for PBI-13 to prevent deleting modules with student submissions.
+

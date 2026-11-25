@@ -6,11 +6,11 @@
 
 ---
 
-## 2. Notice for Sprint 3 Teams (PBI-12 Materials, PBI-13 Assignments, PBI-05 Live Sessions, PBI-06 Quizzes, PBI-09 Reviews)
+## 2. Notice for Sprint 3 Teams (PBI-13 Assignments, PBI-05 Live Sessions, PBI-06 Quizzes, PBI-09 Reviews)
 - **Class Hub Architecture (`config/course_tabs.php`)**:
   - The Course Hub operates on a config-driven tab layout. In `config/course_tabs.php`, reserved routes for your features are already predefined:
-    - Instructor tabs: `instructor.courses.modules.*`, `instructor.courses.assignments.*`, `instructor.courses.sessions.*`, `instructor.courses.quizzes.*`, `instructor.courses.reviews.*`.
-    - Student tabs: `student.courses.modules.*`, `student.courses.assignments.*`, `student.courses.sessions.*`, `student.courses.quizzes.*`, `student.courses.reviews.*`.
+    - Instructor tabs: `instructor.courses.modules.*` (implemented in PBI-12), `instructor.courses.assignments.*`, `instructor.courses.sessions.*`, `instructor.courses.quizzes.*`, `instructor.courses.reviews.*`.
+    - Student tabs: `student.courses.modules.*` (implemented in PBI-12), `student.courses.assignments.*`, `student.courses.sessions.*`, `student.courses.quizzes.*`, `student.courses.reviews.*`.
   - **Tab Activation**: Tabs automatically appear in the UI as soon as the corresponding named route exists in `routes/web.php` (`Route::has`).
   - **Shared Hub Layout Components**:
     - Wrap instructor pages in:  
@@ -18,6 +18,11 @@
     - Wrap student pages in:  
       `<x-student.course-layout :course="$course" title="Your Page Title"> ... </x-student.course-layout>`
     - Do not duplicate header or tab bar markup.
+- **Curriculum & Module Contracts (PBI-12 implemented)**:
+  - Curriculum structure is Course -> Module -> Chapter.
+  - Assignments (PBI-13) attach to `modules` via `module_id`. Do not alter the `modules` table structure.
+  - To prevent deleting modules with student submissions, extend the hooks in `app/Models/Module.php`:  
+    `Module::canBeDeleted(): bool` and `Module::deletionBlockedReason(): ?string`.
 - **Authorization Contracts**:
   - Instructor routes MUST be nested under `/instructor/courses/{course}/...` and call:  
     `Gate::authorize('manage', $course);`
