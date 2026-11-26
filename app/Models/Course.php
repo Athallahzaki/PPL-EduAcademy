@@ -74,6 +74,14 @@ class Course extends Model
     }
 
     /**
+     * Student reviews for this course.
+     */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(CourseReview::class);
+    }
+
+    /**
      * Modules belonging to this course, ordered by position.
      */
     public function modules(): HasMany
