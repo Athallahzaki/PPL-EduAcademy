@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class DiscussionThread extends Model
@@ -35,6 +36,24 @@ class DiscussionThread extends Model
     public function subject(): BelongsTo
     {
         return $this->belongsTo(Subject::class);
+    }
+
+    /**
+     * All comments belonging to this discussion thread.
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class, 'thread_id');
+    }
+
+    /**
+     * Root (top-level) comments belonging to this discussion thread.
+     */
+    public function rootComments(): HasMany
+    {
+        return $this->hasMany(Comment::class, 'thread_id')
+            ->whereNull('parent_id')
+            ->latest('created_at');
     }
 
     /**
