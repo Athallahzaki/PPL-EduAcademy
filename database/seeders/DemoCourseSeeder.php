@@ -108,6 +108,93 @@ class DemoCourseSeeder extends Seeder
                 'enrolled_at' => now()->subMonths(2),
             ]);
         }
+
+        // Demo Curriculum Modules & Chapters for publishedCourse1 (Sprint 3: PBI-12 §9)
+        // Module 1: Published
+        $module1 = \App\Models\Module::firstOrCreate(
+            [
+                'course_id' => $publishedCourse1->id,
+                'title' => 'Module 1: Foundations & Architecture',
+            ],
+            [
+                'description' => 'Core architectural concepts and fundamental building blocks of modern web applications.',
+                'position' => 1,
+                'is_published' => true,
+            ]
+        );
+
+        // Module 1 - Chapter 1: Published Text Chapter (Rich Markdown)
+        \App\Models\Chapter::firstOrCreate(
+            [
+                'module_id' => $module1->id,
+                'title' => 'Course Overview & Prerequisites',
+            ],
+            [
+                'type' => \App\Enums\ChapterType::Text,
+                'body' => "# Welcome to Modern Full-Stack Development\n\nIn this foundational lesson, we explore the essential developer workflow, framework architecture, and environment dependencies.\n\n### Required Tools\n- PHP 8.3 or higher\n- Composer 2.7+\n- Node.js LTS (v20+)\n- Docker Desktop\n\n### Verifying Your Setup\nRun the following shell command to confirm your PHP version:\n\n```bash\nphp -v\ncomposer --version\n```\n\n> **Important:** Keep your database migrations in sync before beginning module exercises.\n\nFor additional official documentation, visit [Laravel Documentation](https://laravel.com).",
+                'video_url' => null,
+                'position' => 1,
+                'is_published' => true,
+            ]
+        );
+
+        // Module 1 - Chapter 2: Published Video Chapter (YouTube)
+        \App\Models\Chapter::firstOrCreate(
+            [
+                'module_id' => $module1->id,
+                'title' => 'Development Environment Walkthrough',
+            ],
+            [
+                'type' => \App\Enums\ChapterType::Video,
+                'video_url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                'body' => "Follow along with this video lecture to configure your local IDE, extensions, and automated linters.\n\nKey timestamps:\n- 00:00 Introduction\n- 01:30 Composer & NPM packages\n- 03:00 First migration",
+                'position' => 2,
+                'is_published' => true,
+            ]
+        );
+
+        // Module 1 - Chapter 3: Draft Chapter
+        \App\Models\Chapter::firstOrCreate(
+            [
+                'module_id' => $module1->id,
+                'title' => 'Advanced Architectural Patterns (Upcoming)',
+            ],
+            [
+                'type' => \App\Enums\ChapterType::Text,
+                'body' => "# Advanced Patterns\n\nThis lesson is currently under review by the instructor.",
+                'video_url' => null,
+                'position' => 3,
+                'is_published' => false,
+            ]
+        );
+
+        // Module 2: Draft Module
+        $module2 = \App\Models\Module::firstOrCreate(
+            [
+                'course_id' => $publishedCourse1->id,
+                'title' => 'Module 2: Reactive Frontend with Vue 3 (Draft)',
+            ],
+            [
+                'description' => 'Draft curriculum module demonstrating that published chapters in a draft module remain hidden from students.',
+                'position' => 2,
+                'is_published' => false,
+            ]
+        );
+
+        // Module 2 - Chapter 1: Published chapter in draft module
+        \App\Models\Chapter::firstOrCreate(
+            [
+                'module_id' => $module2->id,
+                'title' => 'Vue 3 Composition API Essentials',
+            ],
+            [
+                'type' => \App\Enums\ChapterType::Text,
+                'body' => "# Composition API\n\nExploration of `ref`, `reactive`, and script setup syntax.",
+                'video_url' => null,
+                'position' => 1,
+                'is_published' => true,
+            ]
+        );
     }
 }
 

@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 
@@ -70,6 +71,22 @@ class Course extends Model
     public function enrollments(): HasMany
     {
         return $this->hasMany(Enrollment::class);
+    }
+
+    /**
+     * Modules belonging to this course, ordered by position.
+     */
+    public function modules(): HasMany
+    {
+        return $this->hasMany(Module::class)->orderBy('position');
+    }
+
+    /**
+     * Chapters belonging to this course through modules.
+     */
+    public function chapters(): HasManyThrough
+    {
+        return $this->hasManyThrough(Chapter::class, Module::class);
     }
 
     /**
