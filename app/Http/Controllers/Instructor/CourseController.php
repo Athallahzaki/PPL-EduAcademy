@@ -101,6 +101,12 @@ class CourseController extends Controller
         Gate::authorize('manage', $course);
 
         $course->load(['subject', 'instructor'])->loadCount('enrollments');
+        $course->loadAvg('reviews', 'rating');
+        $recentReviews = $course->reviews()
+            ->with('student')
+            ->latest()
+            ->limit(3)
+            ->get();
 
         $modulesCount = $course->modules()->count();
         $publishedModulesCount = $course->modules()->published()->count();
@@ -112,7 +118,8 @@ class CourseController extends Controller
             'modulesCount',
             'publishedModulesCount',
             'chaptersCount',
-            'publishedChaptersCount'
+            'publishedChaptersCount',
+            'recentReviews'
         ));
     }
 

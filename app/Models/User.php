@@ -95,6 +95,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Course reviews written by this user.
+     */
+    public function reviews(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(CourseReview::class, 'student_id');
+    }
+
+    /**
      * Discussion threads started by this user.
      */
     public function threads(): \Illuminate\Database\Eloquent\Relations\HasMany

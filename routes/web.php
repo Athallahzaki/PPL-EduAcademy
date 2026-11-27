@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\CourseReviewController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -48,6 +49,8 @@ Route::middleware(['auth', 'account.active', 'password.changed', 'onboarded'])->
         Route::post('users/{user}/reset-password', Admin\UserPasswordResetController::class)->name('users.reset-password');
         Route::post('users/{id}/restore', [Admin\UserController::class, 'restore'])->name('users.restore');
         Route::get('forums', [Forum\ThreadController::class, 'index'])->name('forums.index');
+        Route::get('reviews', [CourseReviewController::class, 'adminIndex'])->name('reviews.index');
+        Route::delete('reviews/{review}', [CourseReviewController::class, 'adminDestroy'])->name('reviews.destroy');
     });
 
     // Instructor Area (PBI-11)
@@ -60,6 +63,7 @@ Route::middleware(['auth', 'account.active', 'password.changed', 'onboarded'])->
         Route::resource('courses', Instructor\CourseController::class);
         Route::patch('courses/{course}/status', [Instructor\CourseStatusController::class, 'update'])->name('courses.status');
         Route::get('courses/{course}/students', [Instructor\CourseStudentController::class, 'index'])->name('courses.students');
+        Route::get('courses/{course}/reviews', [CourseReviewController::class, 'instructorIndex'])->name('courses.reviews.index');
 
         // Curriculum Management (PBI-12)
         Route::resource('courses.modules', Instructor\ModuleController::class)->except(['show'])->scoped();
@@ -81,6 +85,9 @@ Route::middleware(['auth', 'account.active', 'password.changed', 'onboarded'])->
         Route::post('courses/{course}/enroll', [Student\EnrollmentController::class, 'store'])->name('courses.enroll');
         Route::get('courses', [Student\MyCourseController::class, 'index'])->name('courses.index');
         Route::get('courses/{course}', [Student\MyCourseController::class, 'show'])->name('courses.show');
+        Route::post('courses/{course}/reviews', [CourseReviewController::class, 'store'])->name('courses.reviews.store');
+        Route::put('reviews/{review}', [CourseReviewController::class, 'update'])->name('reviews.update');
+        Route::delete('reviews/{review}', [CourseReviewController::class, 'destroy'])->name('reviews.destroy');
 
         // Course Content & Reader (PBI-12)
         Route::get('courses/{course}/content', [Student\CourseContentController::class, 'index'])->name('courses.modules.index');
