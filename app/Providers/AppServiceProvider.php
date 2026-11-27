@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Models\Scholarship;
+use App\Models\CourseReview;
+use App\Policies\CourseReviewPolicy;
 use App\Policies\ScholarshipPolicy;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
@@ -26,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Gate::policy(CourseReview::class, CourseReviewPolicy::class);
         Gate::policy(Scholarship::class, ScholarshipPolicy::class);
 
         if ($this->app->isProduction()) {

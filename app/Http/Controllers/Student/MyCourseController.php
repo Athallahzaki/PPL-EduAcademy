@@ -39,6 +39,12 @@ class MyCourseController extends Controller
         Gate::authorize('access', $course);
 
         $course->load(['subject', 'instructor.instructorProfile'])->loadCount('enrollments');
+        $course->loadAvg('reviews', 'rating');
+        $ownReview = $course->reviews()->where('student_id', $request->user()->id)->first();
+        $reviews = $course->reviews()
+            ->with('student')
+            ->latest()
+            ->paginate(5, ['*'], 'reviews_page');
 
         // Compact outline for student overview (§7.3)
         $publishedModules = $course->modules()
@@ -47,7 +53,7 @@ class MyCourseController extends Controller
             ->orderBy('position')
             ->get();
 
-        return view('student.courses.show', compact('course', 'publishedModules'));
+        return view('student.courses.show', compact('course', 'publishedModules', 'reviews', 'ownReview'));
     }
 }
 
