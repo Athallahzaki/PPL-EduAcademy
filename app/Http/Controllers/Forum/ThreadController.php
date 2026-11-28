@@ -22,7 +22,8 @@ class ThreadController extends Controller
         Gate::authorize('viewAny', DiscussionThread::class);
 
         $query = DiscussionThread::query()
-            ->with(['user', 'subject']);
+            ->with(['user', 'subject'])
+            ->withCount('comments');
 
         // Filter by subject
         if ($request->filled('subject')) {
@@ -39,6 +40,8 @@ class ThreadController extends Controller
         // Sort order
         if ($request->input('sort') === 'oldest') {
             $query->oldest('created_at');
+        } elseif ($request->input('sort') === 'popular') {
+            $query->orderByDesc('comments_count')->latest('created_at');
         } else {
             $query->latest('created_at');
         }
@@ -101,7 +104,18 @@ class ThreadController extends Controller
     {
         Gate::authorize('view', $thread);
 
-        $thread->load(['user', 'subject']);
+        $thread->load([
+            'user',
+            'subject',
+            'rootComments' => function ($query) {
+                $query->with([
+                    'user',
+                    'replies' => function ($replyQuery) {
+                        $replyQuery->with(['user', 'replies.user'])->oldest('created_at');
+                    },
+                ]);
+            },
+        ])->loadCount('comments');
 
         return view('forum.threads.show', compact('thread'));
     }

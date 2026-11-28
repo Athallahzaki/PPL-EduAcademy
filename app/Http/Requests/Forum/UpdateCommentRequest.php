@@ -21,9 +21,9 @@ class UpdateCommentRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'comment.required' => 'Isi tanggapan tidak boleh kosong.',
-            'comment.min' => 'Isi tanggapan minimal 3 karakter.',
-            'comment.max' => 'Isi tanggapan maksimal 5000 karakter.',
+            'comment.required' => 'Comment cannot be empty.',
+            'comment.min' => 'Comment must be at least 3 characters.',
+            'comment.max' => 'Comment must not exceed 5000 characters.',
         ];
     }
 }

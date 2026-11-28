@@ -27,8 +27,8 @@ class CommentController extends Controller
         ]);
 
         $message = $comment->isReply()
-            ? 'Balasan berhasil dikirimkan.'
-            : 'Tanggapan berhasil dipublikasikan.';
+            ? 'Reply submitted successfully.'
+            : 'Comment posted successfully.';
 
         return redirect()
             ->to(route('forum.threads.show', $thread) . '#comment-' . $comment->id)
@@ -48,7 +48,7 @@ class CommentController extends Controller
 
         return redirect()
             ->to(route('forum.threads.show', $comment->thread) . '#comment-' . $comment->id)
-            ->with('status', 'Tanggapan berhasil diperbarui.');
+            ->with('status', 'Comment updated successfully.');
     }
 
     /**
@@ -63,6 +63,6 @@ class CommentController extends Controller
 
         return redirect()
             ->route('forum.threads.show', $thread)
-            ->with('status', 'Tanggapan berhasil dihapus.');
+            ->with('status', 'Comment deleted successfully.');
     }
 }

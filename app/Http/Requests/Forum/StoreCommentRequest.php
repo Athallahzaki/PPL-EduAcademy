@@ -30,7 +30,7 @@ class StoreCommentRequest extends FormRequest
                 $parentComment = Comment::find($parentId);
 
                 if ($parentComment && $thread && $parentComment->thread_id !== $thread->id) {
-                    $validator->errors()->add('parent_id', 'Komentar yang dibalas harus berasal dari topik diskusi yang sama.');
+                    $validator->errors()->add('parent_id', 'The replied comment must belong to the same discussion topic.');
                 }
             }
         });
@@ -39,10 +39,10 @@ class StoreCommentRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'comment.required' => 'Isi tanggapan tidak boleh kosong.',
-            'comment.min' => 'Isi tanggapan minimal 3 karakter.',
-            'comment.max' => 'Isi tanggapan maksimal 5000 karakter.',
-            'parent_id.exists' => 'Komentar yang ingin Anda balas tidak ditemukan.',
+            'comment.required' => 'Comment cannot be empty.',
+            'comment.min' => 'Comment must be at least 3 characters.',
+            'comment.max' => 'Comment must not exceed 5000 characters.',
+            'parent_id.exists' => 'The comment you are replying to could not be found.',
         ];
     }
 }
