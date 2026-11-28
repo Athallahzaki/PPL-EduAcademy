@@ -66,7 +66,7 @@
                             <x-user-name :user="$thread->user" />
                         </span>
                         @php($authorRole = $thread->user?->role ?? \App\Enums\Role::Student)
-                    <x-badge :variant="$authorRole->badgeColor()" size="sm">{{ $authorRole->label() }}</x-badge>
+                        <x-badge :variant="$authorRole->badgeColor()" size="sm">{{ $authorRole->label() }}</x-badge>
                     </div>
                     <div class="text-xs text-gray-500">
                         Topic Author
@@ -89,5 +89,61 @@
                 </a>
             </div>
         </article>
+
+        <!-- Comments & Responses Section (PBI-15) -->
+        <section class="space-y-6">
+            <div class="flex items-center justify-between">
+                <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2">
+                    <svg class="h-5 w-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+                    </svg>
+                    <span>Comments &amp; Responses</span>
+                    <span class="rounded-full bg-indigo-50 px-2.5 py-0.5 text-xs font-semibold text-indigo-700">
+                        {{ $thread->comments_count ?? $thread->comments->count() }}
+                    </span>
+                </h2>
+            </div>
+
+            <!-- Root Comment Form -->
+            @if (auth()->check() && auth()->user()->isActive())
+                <x-card class="p-5 sm:p-6">
+                    <form method="POST" action="{{ route('forum.threads.comments.store', $thread) }}" class="space-y-4">
+                        @csrf
+                        <div>
+                            <x-label for="root-comment" value="Leave a response" />
+                            <x-textarea
+                                id="root-comment"
+                                name="comment"
+                                rows="3"
+                                class="mt-1 w-full text-sm"
+                                placeholder="Share your perspective or ask a question regarding this topic..."
+                                required
+                            >{{ old('comment') }}</x-textarea>
+                            <x-input-error :messages="$errors->get('comment')" class="mt-1" />
+                        </div>
+
+                        <div class="flex justify-end">
+                            <x-button type="submit" variant="primary" size="sm">
+                                Post Comment
+                            </x-button>
+                        </div>
+                    </form>
+                </x-card>
+            @endif
+
+            <!-- Comments Tree -->
+            @if ($thread->rootComments && $thread->rootComments->isNotEmpty())
+                <div class="space-y-4">
+                    @foreach ($thread->rootComments as $rootComment)
+                        @include('forum.threads._comment', ['comment' => $rootComment, 'depth' => 0])
+                    @endforeach
+                </div>
+            @else
+                <div class="rounded-2xl border border-dashed border-gray-300 bg-white p-8 text-center">
+                    <p class="text-sm font-medium text-gray-600">No responses yet on this topic.</p>
+                    <p class="text-xs text-gray-400 mt-1">Be the first to share your thoughts or answer!</p>
+                </div>
+            @endif
+        </section>
     </div>
 </x-layouts.app>

@@ -103,6 +103,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Comments posted by this user.
+     */
+    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
      * Determine if the student is enrolled in a given course.
      */
     public function isEnrolledIn(Course|int $course): bool

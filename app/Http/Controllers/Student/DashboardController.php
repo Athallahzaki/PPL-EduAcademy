@@ -31,9 +31,10 @@ class DashboardController extends Controller
             ->take(3)
             ->get();
 
-        // PBI-14: Forum Diskusi Terbaru
+        // PBI-14 & PBI-15: Forum Diskusi Terbaru
         $recentThreads = DiscussionThread::query()
             ->with(['user', 'subject'])
+            ->withCount('comments')
             ->latest('created_at')
             ->take(3)
             ->get();

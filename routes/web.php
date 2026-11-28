@@ -90,8 +90,11 @@ Route::middleware(['auth', 'account.active', 'password.changed', 'onboarded'])->
         Route::get('forums', [Forum\ThreadController::class, 'index'])->name('forums.index');
     });
 
-    // Forum Community Area (PBI-14: Thread/Topik Diskusi)
+    // Forum Community Area (PBI-14: Thread/Topik Diskusi, PBI-15: Komentar & Balasan)
     Route::prefix('forum')->name('forum.')->group(function () {
         Route::resource('threads', Forum\ThreadController::class);
+        Route::post('threads/{thread}/comments', [Forum\CommentController::class, 'store'])->name('threads.comments.store');
+        Route::put('comments/{comment}', [Forum\CommentController::class, 'update'])->name('comments.update');
+        Route::delete('comments/{comment}', [Forum\CommentController::class, 'destroy'])->name('comments.destroy');
     });
 });
